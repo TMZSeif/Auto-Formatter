@@ -1,37 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Auto Formatter</title>
-	<meta name="description" content="An Automatic Formatter used to format text from a Google Doc or other similar writing application into a fully AO3 compatible format using the Disco Elsyium Fury of a Shattered Mirror workskin">
+	<meta name="description"
+		content="An Automatic Formatter used to format text from a Google Doc or other similar writing application into a fully AO3 compatible format using the Disco Elsyium Fury of a Shattered Mirror workskin">
 	<meta name="robot" content="index, nofollow">
 	<meta name="author" content="TMZSeif">
 	<link rel="stylesheet" href="style.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
 <body>
-	<nav class="navbar navbar-expand-lg bg-light-subtle" data-bs-theme="dark">
-		<div class="container-fluid flex-column">
-			<h1 class="text-light mb-0 pb-0 text-center">AUTO-FORMATTER</h1>
-			<p class="navbar-text mb-0 pt-1 text-center">This is a Disco Elysium Automatic Formatter which formats your writing into the Fury of a Shattered Mirror AO3 workskin</p>
+	<div class="container-fluid d-flex flex-column px-0">
+		<nav class="navbar navbar-expand-lg bg-light-subtle" data-bs-theme="dark">
+			<div class="container-fluid flex-column">
+				<h1 class="text-light mb-0 pb-0 text-center">AUTO-FORMATTER</h1>
+				<p class="navbar-text mb-0 pt-1 text-center">This is a Disco Elysium Automatic Formatter which formats
+					your
+					writing into the Fury of a Shattered Mirror AO3 workskin</p>
+			</div>
+		</nav>
+		<ul class="nav nav-tabs bg-body-tertiary nav-fill" data-bs-theme="dark" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="format-tab" data-bs-toggle="tab" data-bs-target="#format-tab-pane"
+					type="button" role="tab" aria-controls="format-tab-pane" aria-selected="true">Formatter</button>
+			</li>
+			<li class="nav-item">
+				<button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane"
+					type="button" role="tab" aria-controls="info-tab-pane" aria-selected="false">How to use</button>
+			</li>
+			<li class="nav-item">
+				<button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills-tab-pane"
+					type="button" role="tab" aria-controls="skills-tab-pane" aria-selected="false">Custom
+					Skills</button>
+			</li>
+			<li class="nav-item">
+				<button class="nav-link" id="bg-tab" data-bs-toggle="tab" data-bs-target="#bg-tab-pane" type="button"
+					role="tab" aria-controls="bg-tab-pane" aria-selected="false">Custom Background</button>
+			</li>
+		</ul>
+		<div class="tab-content flex-grow-1 d-flex flex-column" id="nav-tabContent">
+			<div class="tab-pane fade show active flex-grow-1" id="format-tab-pane" role="tabpanel"
+				aria-labelledby="format-tab-pane" tabindex="0">
+				<div class="container-fluid bg-dark-subtle flex-grow-1 d-flex" data-bs-theme="dark">
+					<div class="mb-3 me-3 d-flex flex-column flex-grow-1">
+						<textarea class="form-control flex-grow-1 mt-3 format-input" placeholder="Enter unformatted text here..." id="formatInput"></textarea>
+					</div>
+					<div class="vr bg-light"></div>
+					<div class="mb-3 ms-3 d-flex flex-column flex-grow-1">
+						<textarea readonly class="form-control flex-grow-1 mt-3 format-output" placeholder="Formatted text will be here..." id="formatOutput"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade flex-grow-1" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab-pane" tabindex="0">
+				...
+			</div>
+			<div class="tab-pane fade flex-grow-1" id="skills-tab-pane" role="tabpanel" aria-labelledby="skills-tab-pane"
+				tabindex="0">
+				...
+			</div>
+			<div class="tab-pane fade flex-grow-1" id="bg-tab-pane" role="tabpanel" aria-labelledby="bg-tab-pane" tabindex="0">...
+			</div>
 		</div>
-	</nav>
-	<ul class="nav nav-tabs bg-body-tertiary nav-fill" data-bs-theme="dark" id="myTab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="format-tab" data-bs-toggle="tab" data-bs-target="#format-tab-pane" type="button" role="tab" aria-controls="format-tab-pane" aria-selected="true">Formatter</button>
-		</li>
-		<li class="nav-item">
-			<button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane" type="button" role="tab" aria-controls="info-tab-pane" aria-selected="false">How to use</button>
-		</li>
-		<li class="nav-item">
-			<button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills-tab-pane" type="button" role="tab" aria-controls="skills-tab-pane" aria-selected="false">Custom Skills</button>
-		</li>
-		<li class="nav-item">
-			<button class="nav-link" id="bg-tab" data-bs-toggle="tab" data-bs-target="#bg-tab-pane" type="button" role="tab" aria-controls="bg-tab-pane" aria-selected="false">Custom Background</button>
-		</li>
-	</ul>
+	</div>
 	<script src="script.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>
