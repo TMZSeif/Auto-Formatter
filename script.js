@@ -123,6 +123,7 @@ formatInput.addEventListener("input", event => {
 	let dialogueTree = false
 	let thought = false
 	let bonus = false
+	let item = false
 	for (const line of textList) {
 		const tempDiv = document.createElement("div")
 		tempDiv.innerHTML = line
@@ -154,6 +155,9 @@ formatInput.addEventListener("input", event => {
 			lastestSkill = ""
 			if (checkKeywords(cleanLine) === "Thought gained:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
 				thought = true
+			}
+			if (checkKeywords(cleanLine) === "Item gained:") {
+				item = true
 			}
 			newLine = "<p class='task'>" + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
@@ -198,6 +202,38 @@ formatInput.addEventListener("input", event => {
 				bonus = true
 			}
 			else if (checkKeywords(cleanLine) !== "Thought gained:" && checkKeywords(cleanLine) !== "BREAKTHROUGH IMMINENT:") {
+				newLine = "<p align='center'>" + cleanLine + "</p>"
+				formatOutput.value += newLine + "\n"
+			}
+		}
+		else if (item) {
+			if (cleanLine === "END ITEM") {
+				bonus = false
+				item = false
+				if (formatOutput.value.slice(-5, -1) === "<br>") {
+					console.log(formatOutput.value.slice(-5, -1))
+					formatOutput.value = formatOutput.value.slice(0, -1)
+					formatOutput.value += "</p>\n"
+				}
+			}
+			else if (bonus) {
+				newLine = line + "<br>"
+				if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+				PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+				PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+				MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
+					newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
+					console.log()
+				}
+				
+				formatOutput.value += newLine + "\n"
+			}
+			else if (cleanLine === "BONUS START") {
+				newLine = "<p align='center'>"
+				formatOutput.value += newLine
+				bonus = true
+			}
+			else if (checkKeywords(cleanLine) !== "Item gained:") {
 				newLine = "<p align='center'>" + cleanLine + "</p>"
 				formatOutput.value += newLine + "\n"
 			}
