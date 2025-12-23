@@ -1,5 +1,11 @@
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
+	trigger: 'focus'
+}))
+
 let formatInput = document.getElementById("formatInput")
 let formatOutput = document.getElementById("formatOutput")
+const copyButton = document.getElementById("copyBtn")
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "VISUAL", "CONCEPTUALIZATION", "DRAMA"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "ESPRIT", "SUGGESTION", "INLAND EMPIRE", "INLAND"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "PHYSICAL", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD", "PAIN",
@@ -34,6 +40,24 @@ const createSkillDialogue = (type, line) => {
 	return [ newLine, oldSkill ]
 }
 
+const checkSkillNames = (firstWord) => {
+	if (INTELLECT.includes(firstWord)) {
+		return "int"
+	}
+	if (PSYCHE.includes(firstWord)) {
+		return "psy"
+	}
+	if (PHYSIQUE.includes(firstWord)) {
+		return "fys"
+	}
+	if (MOTORICS.includes(firstWord)) {
+		return "mot"
+	}
+	if (firstWord === "YOU") {
+		return "you"
+	}
+}
+
 formatInput.addEventListener("input", event => {
 	let unformattedText = event.target.value
 	formatOutput.value = ""
@@ -47,24 +71,15 @@ formatInput.addEventListener("input", event => {
 		const cleanLine = tempDiv.textContent
 		const firstWord = cleanLine.split(" ")[0]
 		if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
-			if (INTELLECT.includes(firstWord)) {
-				[newLine, lastestSkill] = createSkillDialogue("int", cleanLine)
-				formatOutput.value += newLine + "\n"
-			}
-			if (PSYCHE.includes(firstWord)) {
-				[newLine, lastestSkill] = createSkillDialogue("psy", cleanLine)
-				formatOutput.value += newLine + "\n"
-			}
-			if (PHYSIQUE.includes(firstWord)) {
-				[newLine, lastestSkill] = createSkillDialogue("fys", cleanLine)
-				formatOutput.value += newLine + "\n"
-			}
-			if (MOTORICS.includes(firstWord)) {
-				console.log("TESTING")
-				let [newLine, lastestSkill] = createSkillDialogue("mot", cleanLine)
-				console.log(newLine)
+			const type = checkSkillNames(firstWord)
+			if (type) {
+				[newLine, lastestSkill] = createSkillDialogue(type, cleanLine)
 				formatOutput.value += newLine + "\n"
 			}
 		}
 	}
+})
+
+copyButton.addEventListener("click", async () => {
+	await navigator.clipboard.writeText(formatOutput.value)
 })
