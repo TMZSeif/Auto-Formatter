@@ -12,14 +12,16 @@ let PHYSIQUE = ["PHYSICAL INSTRUMENT", "PHYSICAL", "ENDURANCE", "ELECTROCHEMISTR
 	"HALF LIGHT", "HALF"]
 let MOTORICS = ["REACTION SPEED", "REACTION", "HAND/EYE COORDINATION", "HAND/EYE", "PERCEPTION", "SAVOIR FAIRE", "SAVOIR",
 	"COMPOSURE", "INTERFACING"]
-let KEYWORDS = {
+let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
 	"MORALE DAMAGED": "moraledmg", "MORALE CRITICAL": "moraledmg",
-	"HEALED MORALE": "moraleheal", "HEALTH DAMAGED": "healthdmg", "HEALTH CRITICAL": "healthdmg", 
-	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal", 
+	"HEALED MORALE": "moraleheal", "HEALTH DAMAGED": "healthdmg", "HEALTH CRITICAL": "healthdmg",
+	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal",
 	"PSYCHE RAISED": "moraledmg",
 	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
 }
+let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
+	 "Breakthrough imminent:"]
 
 const createSkillDialogue = (type, line) => {
 	const skillCheck = line.split(" - ")[0]
@@ -93,6 +95,25 @@ const handleDialogueTrees = (chosen, line) => {
 	}
 }
 
+const checkChecks = (line) => {
+	for (const [keyword, value] of Object.entries(CHECKS)) {
+		if (line.includes(keyword)) {
+			console.log(true)
+			return value
+		}
+	}
+	return false
+}
+
+const checkKeywords = (line) => {
+	for (const keyword of KEYWORDS) {
+		if (line.includes(keyword)) {
+			return true
+		}
+	}
+	return false
+}
+
 formatInput.addEventListener("input", event => {
 	const unformattedText = event.target.value
 	formatOutput.value = ""
@@ -123,8 +144,13 @@ formatInput.addEventListener("input", event => {
 			newLine = "<p align='center'><em>" + cleanLine + "</em></p>"
 			formatOutput.value += newLine + "\n"
 		}
-		else if (KEYWORDS[cleanLine.trim()]) {
-			newLine = `<p align='center'><span class='${KEYWORDS[cleanLine.trim()]}'>` + cleanLine + "</span></p>"
+		else if (checkChecks(cleanLine) && cleanLine === cleanLine.toUpperCase()) {
+			newLine = `<p align='center'><span class='${checkChecks(cleanLine)}'>` + cleanLine + "</span></p>"
+			formatOutput.value += newLine + "\n"
+		}
+		else if (checkKeywords(cleanLine) || (cleanLine.includes("xp") && cleanLine.length < 10)) {
+			lastestSkill = ""
+			newLine = "<p class='task'>" + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
