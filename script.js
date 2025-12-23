@@ -3,8 +3,8 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 	trigger: 'focus'
 }))
 
-let formatInput = document.getElementById("formatInput")
-let formatOutput = document.getElementById("formatOutput")
+const formatInput = document.getElementById("formatInput")
+const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "VISUAL", "CONCEPTUALIZATION", "DRAMA"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "ESPRIT", "SUGGESTION", "INLAND EMPIRE", "INLAND"]
@@ -58,19 +58,54 @@ const checkSkillNames = (firstWord) => {
 	}
 }
 
+const handleDialogueTrees = (chosen, line) => {
+	let locked = ""
+	if (chosen) {
+		locked = "-locked"
+	}
+	if (line.trim().at(-1) === "W") {
+		let newLine = `<li class='dialogue-check'><span class='whitecheck${locked}'>` + line.slice(0, -2) + "</span></li>"
+		return newLine
+	}
+	else if (line.trim().at(-1) === "R") {
+		let newLine = "<li class='dialogue-check'><span class='redcheck'>" + line.slice(0, -2) + "</span></li>"
+		return newLine
+	}
+	else {
+		if (chosen) {
+			locked = "-fin"
+		}
+		let newLine = `<li class='dialogue${locked}'>` + line + "</li>"
+		return newLine
+	}
+}
+
 formatInput.addEventListener("input", event => {
-	let unformattedText = event.target.value
+	const unformattedText = event.target.value
 	formatOutput.value = ""
-	let formattedText = marked.parse(unformattedText)
-	const textList = formattedText.split("\n")
+	const textList = marked.parse(unformattedText).split("\n")
 	let newLine = "";
 	let lastestSkill = "";
+	let dialogueTree = false
 	for (const line of textList) {
 		const tempDiv = document.createElement("div")
 		tempDiv.innerHTML = line
 		const cleanLine = tempDiv.textContent
 		const firstWord = cleanLine.split(" ")[0]
-		if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
+		if (line.trim() === "<ol>") {
+			dialogueTree = true
+			lastestSkill = ""
+			formatOutput.value += line + "\n"
+		}
+		else if (line.trim() === "</ol>") {
+			dialogueTree = false
+			formatOutput.value += line + "\n"
+		}
+		else if (dialogueTree && firstWord.length >= 1) {
+			newLine = handleDialogueTrees(line.includes("<em>"), cleanLine)
+			formatOutput.value += newLine + "\n"
+		}
+		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
 			const type = checkSkillNames(firstWord)
 			if (type) {
 				[newLine, lastestSkill] = createSkillDialogue(type, cleanLine)
