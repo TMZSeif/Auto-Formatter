@@ -50,23 +50,30 @@ const createSkillDialogue = (type, line) => {
 	return [newLine, oldSkill]
 }
 
-const checkSkillNames = (firstWord) => {
-	if (INTELLECT.includes(firstWord)) {
-		return "int"
+const checkSkillNames = (skill) => {
+	const skills = skill.split(" ")
+	let types = []
+	for (const item of skills) {
+		if (INTELLECT.includes(item)) {
+			types.push("int") 
+		}
+		if (PSYCHE.includes(item)) {
+			types.push("psy")
+		}
+		if (PHYSIQUE.includes(item)) {
+			types.push("fys")
+		}
+		if (MOTORICS.includes(item)) {
+			types.push("mot")
+		}
 	}
-	if (PSYCHE.includes(firstWord)) {
-		return "psy"
+	if (skill === "YOU") {
+		return ["you"]
 	}
-	if (PHYSIQUE.includes(firstWord)) {
-		return "fys"
+	if (types.length === 0) {
+		return ["neutral"]
 	}
-	if (MOTORICS.includes(firstWord)) {
-		return "mot"
-	}
-	if (firstWord === "YOU") {
-		return "you"
-	}
-	return "neutral"
+	return types
 }
 
 const handleDialogueTrees = (chosen, line) => {
@@ -185,7 +192,7 @@ formatInput.addEventListener("input", event => {
 					PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
 					PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
 					MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
-						newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
+						newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
 						console.log()
 					}
 					
@@ -222,7 +229,7 @@ formatInput.addEventListener("input", event => {
 				PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
 				PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
 				MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
-					newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
+					newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
 					console.log()
 				}
 				
@@ -239,11 +246,24 @@ formatInput.addEventListener("input", event => {
 			}
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
-			const type = checkSkillNames(firstWord)
-			if (type) {
-				[newLine, lastestSkill] = createSkillDialogue(type, cleanLine)
+			const types = checkSkillNames(cleanLine.split(" - ")[0])
+			if (types.length === 1) {
+				[newLine, lastestSkill] = createSkillDialogue(types[0], cleanLine)
 				formatOutput.value += newLine + "\n"
 			}
+			else {
+				[newLine, lastestSkill] = createSkillDialogue("neutral", cleanLine)
+				let skill = "<p>"
+				for (let word of cleanLine.split(" - ")[0].split(" ")) {
+					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span>"
+				}
+				newLine = newLine.split(" - ").slice(1).join(" - ")
+				formatOutput.value += skill + " - " + newLine + "\n"
+			}
+		}
+		else {
+			newLine = `<p class='indent'><span class='hide'>${lastestSkill} - </span>` + cleanLine + "</p>"
+			formatOutput.value += newLine + "\n"
 		}
 	}
 })
