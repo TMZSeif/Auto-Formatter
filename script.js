@@ -21,7 +21,7 @@ let CHECKS = {
 	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
 }
 let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
-	 "Breakthrough imminent:"]
+	"BREAKTHROUGH IMMINENT:"]
 
 const createSkillDialogue = (type, line) => {
 	const skillCheck = line.split(" - ")[0]
@@ -108,7 +108,7 @@ const checkChecks = (line) => {
 const checkKeywords = (line) => {
 	for (const keyword of KEYWORDS) {
 		if (line.includes(keyword)) {
-			return true
+			return keyword
 		}
 	}
 	return false
@@ -121,6 +121,8 @@ formatInput.addEventListener("input", event => {
 	let newLine = "";
 	let lastestSkill = "";
 	let dialogueTree = false
+	let thought = false
+	let bonus = false
 	for (const line of textList) {
 		const tempDiv = document.createElement("div")
 		tempDiv.innerHTML = line
@@ -150,8 +152,55 @@ formatInput.addEventListener("input", event => {
 		}
 		else if (checkKeywords(cleanLine) || (cleanLine.includes("xp") && cleanLine.length < 10)) {
 			lastestSkill = ""
+			if (checkKeywords(cleanLine) === "Thought gained:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
+				thought = true
+			}
 			newLine = "<p class='task'>" + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
+		}
+		else if (thought) {
+			if (cleanLine === "END THOUGHT") {
+				bonus = false
+				thought = false
+				if (formatOutput.value.slice(-5, -1) === "<br>") {
+					console.log(formatOutput.value.slice(-5, -1))
+					formatOutput.value = formatOutput.value.slice(0, -1)
+					formatOutput.value += "</p>\n"
+				}
+			}
+			else if (bonus) {
+				if (cleanLine.includes("Research time:")) {
+					formatOutput.value = formatOutput.value.slice(0, -5)
+					newLine = "\n<p align='center'>" + cleanLine + "</p>"
+					formatOutput.value += newLine + "\n"
+					bonus = false
+				}
+				else {
+					newLine = line + "<br>"
+					if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+					PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+					PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+					MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
+						newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
+						console.log()
+					}
+					
+					formatOutput.value += newLine + "\n"
+				}
+			}
+			else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
+				newLine = "<p align='center'><span class='neutral'>" + cleanLine + "</span></p>"
+				formatOutput.value += newLine + "\n"
+			}
+			else if (cleanLine === "Temporary research bonus:" || cleanLine === "Permanent research bonus:") {
+				newLine = "<p align='center'>" + cleanLine + "<br>"
+				formatOutput.value += newLine + "\n"
+				bonus = true
+			}
+			else if (checkKeywords(cleanLine) !== "Thought gained:" && checkKeywords(cleanLine) !== "BREAKTHROUGH IMMINENT:") {
+				newLine = "<p align='center'>" + cleanLine + "</p>"
+				formatOutput.value += newLine + "\n"
+			}
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
 			const type = checkSkillNames(firstWord)
