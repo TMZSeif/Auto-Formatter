@@ -9,9 +9,17 @@ const copyButton = document.getElementById("copyBtn")
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "VISUAL", "CONCEPTUALIZATION", "DRAMA"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "ESPRIT", "SUGGESTION", "INLAND EMPIRE", "INLAND"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "PHYSICAL", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD", "PAIN",
-			 "HALF LIGHT", "HALF"]
+	"HALF LIGHT", "HALF"]
 let MOTORICS = ["REACTION SPEED", "REACTION", "HAND/EYE COORDINATION", "HAND/EYE", "PERCEPTION", "SAVOIR FAIRE", "SAVOIR",
-			 "COMPOSURE", "INTERFACING"]
+	"COMPOSURE", "INTERFACING"]
+let KEYWORDS = {
+	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
+	"MORALE DAMAGED": "moraledmg", "MORALE CRITICAL": "moraledmg",
+	"HEALED MORALE": "moraleheal", "HEALTH DAMAGED": "healthdmg", "HEALTH CRITICAL": "healthdmg", 
+	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal", 
+	"PSYCHE RAISED": "moraledmg",
+	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
+}
 
 const createSkillDialogue = (type, line) => {
 	const skillCheck = line.split(" - ")[0]
@@ -37,7 +45,7 @@ const createSkillDialogue = (type, line) => {
 		check = "<span class='check'>[" + check + "</span>"
 	}
 	const newLine = skill + check + " - " + text + "</p>"
-	return [ newLine, oldSkill ]
+	return [newLine, oldSkill]
 }
 
 const checkSkillNames = (firstWord) => {
@@ -56,6 +64,7 @@ const checkSkillNames = (firstWord) => {
 	if (firstWord === "YOU") {
 		return "you"
 	}
+	return "neutral"
 }
 
 const handleDialogueTrees = (chosen, line) => {
@@ -69,6 +78,10 @@ const handleDialogueTrees = (chosen, line) => {
 	}
 	else if (line.trim().at(-1) === "R") {
 		let newLine = "<li class='dialogue-check'><span class='redcheck'>" + line.slice(0, -2) + "</span></li>"
+		return newLine
+	}
+	else if (line.trim().at(-1) === "M") {
+		let newLine = `<li class='dialogue-check'><span class='moneycheck${locked}'>` + line.slice(0, -2) + "</span></li>"
 		return newLine
 	}
 	else {
@@ -103,6 +116,15 @@ formatInput.addEventListener("input", event => {
 		}
 		else if (dialogueTree && firstWord.length >= 1) {
 			newLine = handleDialogueTrees(line.includes("<em>"), cleanLine)
+			formatOutput.value += newLine + "\n"
+		}
+		else if (line.includes("<em>")) {
+			lastestSkill = ""
+			newLine = "<p align='center'><em>" + cleanLine + "</em></p>"
+			formatOutput.value += newLine + "\n"
+		}
+		else if (KEYWORDS[cleanLine.trim()]) {
+			newLine = `<p align='center'><span class='${KEYWORDS[cleanLine.trim()]}'>` + cleanLine + "</span></p>"
 			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
