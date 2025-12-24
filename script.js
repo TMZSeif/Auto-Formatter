@@ -104,7 +104,7 @@ const handleDialogueTrees = (chosen, line) => {
 
 const checkChecks = (line) => {
 	for (const [keyword, value] of Object.entries(CHECKS)) {
-		if (line.includes(keyword)) {
+		if (line.toUpperCase().includes(keyword.toUpperCase())) {
 			console.log(true)
 			return value
 		}
@@ -114,7 +114,7 @@ const checkChecks = (line) => {
 
 const checkKeywords = (line) => {
 	for (const keyword of KEYWORDS) {
-		if (line.includes(keyword)) {
+		if (line.toUpperCase().includes(keyword.toUpperCase())) {
 			return keyword
 		}
 	}
