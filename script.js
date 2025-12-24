@@ -6,12 +6,12 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 const formatInput = document.getElementById("formatInput")
 const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
-let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA"]
-let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE"]
+let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
+let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-	"HALF LIGHT"]
+	"HALF LIGHT", "PHYSIQUE", "FYS"]
 let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "SAVOIR FAIRE",
-	"COMPOSURE", "INTERFACING"]
+	"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
 	"MORALE DAMAGED": "moraledmg", "MORALE CRITICAL": "moraledmg",
@@ -134,12 +134,31 @@ const checkKeywords = (line) => {
 }
 
 const replaceSkillBonuses = (newLine) => {
-	if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-	PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-	PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-	MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
-		return newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
-	}
+	let done = false
+	INTELLECT.forEach((skill) => {
+		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			done = true
+			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='int'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+		}
+	})
+	PSYCHE.forEach((skill) => {
+		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			done = true
+			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='psy'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+		}
+	})
+	PHYSIQUE.forEach((skill) => {
+		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			done = true
+			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='fys'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+		}
+	})
+	MOTORICS.forEach((skill) => {
+		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			done = true
+			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='mot'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+		}
+	})
 	return newLine
 }
 
@@ -211,6 +230,7 @@ formatInput.addEventListener("input", event => {
 				else {
 					newLine = line + "<br>"
 					newLine = replaceSkillBonuses(newLine)
+					console.log(newLine)
 					formatOutput.value += newLine + "\n"
 				}
 			}
