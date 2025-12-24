@@ -160,10 +160,10 @@ formatInput.addEventListener("input", event => {
 		}
 		else if (checkKeywords(cleanLine) || (cleanLine.includes("xp") && cleanLine.length < 10)) {
 			lastestSkill = ""
-			if (checkKeywords(cleanLine) === "Thought gained:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
+			if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
 				thought = true
 			}
-			if (checkKeywords(cleanLine) === "Item gained:") {
+			if (checkKeywords(cleanLine).toUpperCase() === "ITEM GAINED:") {
 				item = true
 			}
 			newLine = "<p class='task'>" + cleanLine + "</p>"
