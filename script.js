@@ -54,7 +54,7 @@ const createSkillDialogue = (type, line) => {
 }
 
 const checkSkillNames = (skill) => {
-	const skills = skill.split("AND")
+	const skills = skill.split(" AND ")
 	let types = []
 	if (INTELLECT.includes(skill)) {
 		return ["int"]
@@ -69,6 +69,7 @@ const checkSkillNames = (skill) => {
 		return ["mot"]
 	}
 	for (const item of skills) {
+		console.log(item.replace(/\s*\[.*?\]\s*/g))
 		if (INTELLECT.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("int") 
 		}
@@ -285,11 +286,11 @@ formatInput.addEventListener("input", event => {
 			else {
 				[newLine, lastestSkill] = createSkillDialogue("neutral", cleanLine)
 				let skill = "<p>"
-				for (let word of cleanLine.split(" - ")[0].split("AND")) {
-					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span><span class='neutral'>AND</span>"
+				for (let word of cleanLine.split(" - ")[0].split(" AND ")) {
+					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span><span class='neutral'> AND </span>"
 				}
 				newLine = newLine.split(" - ").slice(1).join(" - ")
-				formatOutput.value += skill.slice(0, -32) + " - " + newLine + "\n"
+				formatOutput.value += skill.slice(0, -34) + " - " + newLine + "\n"
 			}
 		}
 		else if (firstWord.length >= 1) {
