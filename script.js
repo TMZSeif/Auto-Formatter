@@ -6,11 +6,14 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 const formatInput = document.getElementById("formatInput")
 const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
+const previewButton = document.getElementById("preview-tab")
+const preview = document.getElementById("previewInsert")
+
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
 	"HALF LIGHT", "PHYSIQUE", "FYS"]
-let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "SAVOIR FAIRE",
+let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
 	"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
@@ -298,4 +301,8 @@ formatInput.addEventListener("input", event => {
 
 copyButton.addEventListener("click", async () => {
 	await navigator.clipboard.writeText(formatOutput.value)
+})
+
+previewButton.addEventListener("click", () => {
+	preview.innerHTML = formatOutput.value
 })

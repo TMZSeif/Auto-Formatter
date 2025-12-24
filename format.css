@@ -1,0 +1,557 @@
+#workskin {
+  padding: 0;
+  overflow: hidden;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, sans-serif, "GNU Unifont" !important;
+  max-width: 72em;
+}
+
+#workskin div.userstuff p:first-child,
+#workskin div.userstuff p:first-of-type {
+  margin: 0;
+}
+
+#workskin div.userstuff {
+  color: #cfd5bf;
+  overflow: hidden;
+}
+
+#workskin #chapters div.userstuff a,
+#workskin .userstuff.module a {
+  color: #cfd5bf;
+}
+
+#workskin .feld-overlay-start {
+  background-image: linear-gradient(180deg, transparent 0, transparent 2.5em, #222222 2.5em, #222 3em, transparent 3em), linear-gradient(180deg, rgba(34, 34, 34, 1) 0, rgba(34, 34, 34, 1) 1em, rgba(36, 34, 36, 1) 2em, #3b3c44 2em, #3b3c44 2.8em, transparent 2.8em);
+  background-position: 65% 0, 0 100%;
+  background-size: 3.25em 100%, 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 20;
+  height: 3em;
+  width: 104%;
+  margin-bottom: 1em;
+  margin-left: -2%;
+  border: 10px;
+  box-sizing: border-box;
+  transform-origin: top right;
+  transform: rotate(1deg);
+  display: block;
+}
+
+#workskin .feld-body {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em),  linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 100% 100%, 0 50%, 100% 50%, 100% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  margin-bottom: -6em;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 0;
+}
+
+#workskin .feld-body-var1 {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 100%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  padding: 3em 2.6em 1em 2.6em;
+  z-index: 0;
+}
+
+#workskin .feld-body-var2 {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em),linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 100% 100%, 0 50%, 0 0%,100% 50%, 100% 100%, 100% 100%, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 100% 97%, 3.725em 97%,3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  margin-bottom: -6em;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 0;
+}
+
+#workskin .feld-body-var3 {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 100%, 3.725em 110%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 0;
+  text-overflow: clip;
+  overflow: hidden;
+  position: relative;
+}
+
+#workskin .feld-body-var4 {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  margin-bottom: -6em;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 0;
+}
+
+#workskin .feld-body-right {
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 100%, 3.725em 110%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-left: 1%;
+  padding: 0em 2.6em 0em 2.6em;
+  z-index: 0;
+  text-overflow: clip;
+  overflow: hidden;
+  position: relative;
+}
+
+#workskin .feld-broken {
+  background-color: #222222;
+  color: #cfd5bf;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 5;
+}
+
+#workskin .broken-transition {
+  background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(0,0,0,1) 100%);
+  color: #cfd5bf;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 5;
+  height: 50em;
+}
+
+#workskin .oblivionfadein {
+  margin: 0em -2.6em 0em -2.6em;
+  width: auto;
+  height: 30em;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 100%);
+}
+
+#workskin .oblivionfadeout {
+  margin: 0em -2.6em 0em -2.6em;
+  width: auto;
+  height: 30em;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 100%);
+}
+
+#workskin .oblivion {
+  background-color: #000000;
+  color: #ffffff;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 5;
+}
+
+#workskin .oblivionq {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 3em 2.6em 4em 2.6em;
+  margin: 0em -2.6em 0em -2.6em;
+}
+
+#workskin .feld-overlay-end {
+  background-image: linear-gradient(360deg, transparent 0, transparent 4.5em, #222222 4.5em, #222 5em, transparent 5em), linear-gradient(360deg, rgba(34, 34, 34, 1) 0, rgba(34, 34, 34, 1) 1em, rgba(36, 34, 36, 1) 4em, #3b3c44 4em, #3b3c44 4.8em, transparent 4.8em);
+  background-position: 35% 0, 0 100%;
+  background-size: 3.25em 100%, 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 20;
+  height: 5em;
+  width: 104%;
+  margin-top: 1em;
+  margin-left: -2%;
+  border: 10px;
+  box-sizing: border-box;
+  transform-origin: bottom left;
+  transform: rotate(2deg);
+  display: block;
+  overflow: hidden;
+}
+
+#workskin .feld-overlay-end:before {
+  content: 'FELD PLAYBACK';
+  color: #5d5e5e;
+  transform: skew(8deg);
+  margin: .2em 0 0 50%;
+  font-family: Arial, sans-serif;
+  font-size: .9em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#workskin .feld-overlay-end:after {
+  content: '01█16 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 01█17\0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 01█18\0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 01█19 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0  \0000a0 \0000a0 \0000a0 \0000a0 \0000a0  \0000a0  \0000a0  \0000a0  \0000a001█20';
+  color: #4f4f50;
+  transform: skew(8deg) scale(1.1, 0.9);
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: -.35em 0 0 20%;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#workskin div.preface {
+  margin-bottom: 0;
+}
+
+#workskin div.afterword {
+  margin-top: 0;
+}
+
+#workskin .hide {
+  display: none;
+}
+
+#workskin #chapters div.userstuff p,
+#workskin .userstuff.module p {
+  text-indent: -1em;
+  margin-left: 1em;
+}
+
+#workskin .centertext p {
+  text-indent: 0em !important;
+  margin-left: 0em !important;
+}
+
+#workskin #chapters div.userstuff .indent,
+#workskin .userstuff.module .indent {
+  text-indent: 0em;
+  margin-left: 1em;
+}
+
+#workskin .neutral,
+#workskin .int,
+#workskin .psy,
+#workskin .fys,
+#workskin .mot,
+#workskin .intfade,
+#workskin .psyfade,
+#workskin .fysfade,
+#workskin .motfade {
+  font-weight: bold;
+}
+
+#workskin .you {
+  color: #c3d2db;
+}
+
+#workskin .int,
+#workskin .extint {
+  color: #5cc1d7;
+}
+
+#workskin .psy,
+#workskin .extpsy {
+  color: #7556cf;
+}
+
+#workskin .fys,
+#workskin .extfys {
+  color: #cb476a;
+}
+
+#workskin .mot,
+#workskin .extmot {
+  color: #e3b734;
+}
+
+#workskin .furies {
+  color: #50514E;
+}
+
+#workskin .apricot {
+  color: #FFB27F;
+  text-shadow: 2px 2px 2px #c3d2db, 2px 2px 2px #c3d2db;
+}
+
+#workskin .check {
+  color: #9c9686;
+}
+
+#workskin .task {
+  color: #93b885;
+}
+
+#workskin .invert {
+  color: #222222;
+}
+
+#workskin .dream {
+  color: #303030;
+}
+
+#workskin .intfade {
+  color: #95cacb;
+}
+
+#workskin .psyfade {
+  color: #a195c7;
+}
+
+#workskin .fysfade {
+  color: #cc8d94;
+}
+
+#workskin .motfade {
+  color: #d9c579;
+}
+
+#workskin .pale {
+  color: #c3d2db;
+  text-shadow: 2px 2px 2px #c3d2db, 2px 2px 2px #c3d2db;
+}
+
+#workskin .disco-end {
+  background-color: #8f2710;
+  display: block;
+  width: 97%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: .1em;
+}
+
+#workskin .disco-end::after {
+  content: 'END \0000a0▉';
+  font-family: Dobra, "Dobra Light", Roboto, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 1.75em;
+  padding-left: .75em;
+}
+
+#workskin li {
+  color: #222222;
+}
+
+#workskin li.dialogue::marker,
+#workskin li.dialogue-fin::marker {
+  color: #cfd5bf;
+}
+
+#workskin li.dialogue::before,
+#workskin li.dialogue-fin::before,
+#workskin span.whitecheck::before,
+#workskin span.whitecheck-locked::before,
+#workskin span.redcheck::before,
+#workskin span.pricheck::before {
+  content: '-\000a0';
+  color: inherit;
+}
+
+#workskin li,
+#workskin .dialogue,
+#workskin li.dialogue,
+#workskin .dialogue-fin,
+#workskin li.dialogue-fin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#workskin .dialogue,
+#workskin li.dialogue {
+  color: #d7431b;
+  padding: 0.4em 0.4em 0.4em 0;
+}
+
+#workskin .dialogue-fin,
+#workskin li.dialogue-fin {
+  color: #93341a;
+  padding: 0.4em 0.4em 0.4em 0;
+}
+
+#workskin .dialogue-check,
+#workskin li.dialogue-check {
+  margin-top: 0.5em;
+  margin-bottom: -0.5em;
+  position: relative;
+  z-index: 0;
+}
+
+#workskin .whitecheck,
+#workskin .whitecheck-locked,
+#workskin .redcheck {
+  border-top-right-radius: 20px 20px;
+  border-top-left-radius: 20px 20px;
+  border-bottom-right-radius: 30px 190px;
+  border-bottom-left-radius: 30px 190px;
+  color: #222222;
+  margin-left: -1.75em;
+  padding: 0.5em 0.5em 0.5em 1.75em;
+  display: inline-block;
+  line-height: 1.5em;
+  width: 90%;
+  position: relative;
+  z-index: -9;
+  vertical-align: text-top;
+  top: -0.5em;
+}
+
+#workskin .whitecheck {
+  background-color: #cdc5b8;
+}
+
+#workskin .whitecheck-locked {
+  background-color: #cdc5b8;
+  color: #7a7468;
+}
+
+#workskin .redcheck {
+  background-color: #d64121;
+}
+
+#workskin .whitecheck:hover,
+#workskin li.dialogue-check:hover > .whitecheck {
+  background-color: #868070;
+  color: #fefbf4;
+}
+
+#workskin .redcheck:hover,
+#workskin li.dialogue:hover,
+#workskin li.dialogue-fin:hover,
+#workskin li.dialogue-check:hover,
+#workskin li.dialogue-check:hover > .redcheck {
+  color: #fefbf4;
+}
+
+#workskin .success {
+  color: #e2e2e2;
+  background-color: #359c61;
+  padding: 0.5%;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .fail {
+  color: #e2e2e2;
+  background-color: #BA2900;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .harry {
+  color: #3A4E29;
+}
+
+#workskin .moraledmg {
+  color: #e2e2e2;
+  background-color: #7b37dc;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .moraleheal {
+  color: #e2e2e2;
+  background-color: #6caeea;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .healthdmg {
+  color: #e2e2e2;
+  background-color: #BA2900;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .healthheal {
+  color: #e2e2e2;
+  background-color: #e24b17;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .reddrug {
+  color: #e2e2e2;
+  background-color: #cb476a;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .moneygained {
+  color: #e2e2e2;
+  background-color: #e3b734;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .bigicon {
+  color: #e2e2e2;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3em;
+}
+
+#workskin .feldsnippet {
+  background-color: #222222;
+  color: #cfd5bf;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  text-indent: 0em;
+}
