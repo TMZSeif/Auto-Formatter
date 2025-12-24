@@ -6,11 +6,11 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 const formatInput = document.getElementById("formatInput")
 const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
-let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "VISUAL", "CONCEPTUALIZATION", "DRAMA"]
-let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "ESPRIT", "SUGGESTION", "INLAND EMPIRE", "INLAND"]
-let PHYSIQUE = ["PHYSICAL INSTRUMENT", "PHYSICAL", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD", "PAIN",
-	"HALF LIGHT", "HALF"]
-let MOTORICS = ["REACTION SPEED", "REACTION", "HAND/EYE COORDINATION", "HAND/EYE", "PERCEPTION", "SAVOIR FAIRE", "SAVOIR",
+let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA"]
+let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE"]
+let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+	"HALF LIGHT"]
+let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "SAVOIR FAIRE",
 	"COMPOSURE", "INTERFACING"]
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
@@ -51,19 +51,31 @@ const createSkillDialogue = (type, line) => {
 }
 
 const checkSkillNames = (skill) => {
-	const skills = skill.split(" ")
+	const skills = skill.split("AND")
 	let types = []
+	if (INTELLECT.includes(skill)) {
+		return ["int"]
+	}
+	if (PSYCHE.includes(skill)) {
+		return ["psy"]
+	}
+	if (PHYSIQUE.includes(skill)) {
+		return ["fys"]
+	}
+	if (MOTORICS.includes(skill)) {
+		return ["mot"]
+	}
 	for (const item of skills) {
-		if (INTELLECT.includes(item)) {
+		if (INTELLECT.includes(item.trim())) {
 			types.push("int") 
 		}
-		if (PSYCHE.includes(item)) {
+		if (PSYCHE.includes(item.trim())) {
 			types.push("psy")
 		}
-		if (PHYSIQUE.includes(item)) {
+		if (PHYSIQUE.includes(item.trim())) {
 			types.push("fys")
 		}
-		if (MOTORICS.includes(item)) {
+		if (MOTORICS.includes(item.trim())) {
 			types.push("mot")
 		}
 	}
@@ -250,11 +262,11 @@ formatInput.addEventListener("input", event => {
 			else {
 				[newLine, lastestSkill] = createSkillDialogue("neutral", cleanLine)
 				let skill = "<p>"
-				for (let word of cleanLine.split(" - ")[0].split(" ")) {
-					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span>"
+				for (let word of cleanLine.split(" - ")[0].split("AND")) {
+					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span><span class='neutral'>AND</span>"
 				}
 				newLine = newLine.split(" - ").slice(1).join(" - ")
-				formatOutput.value += skill + " - " + newLine + "\n"
+				formatOutput.value += skill.slice(0, -32) + " - " + newLine + "\n"
 			}
 		}
 		else if (firstWord.length >= 1) {
