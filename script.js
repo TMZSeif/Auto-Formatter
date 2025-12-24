@@ -121,6 +121,16 @@ const checkKeywords = (line) => {
 	return false
 }
 
+const replaceSkillBonuses = (newLine) => {
+	if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+	PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+	PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
+	MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
+		return newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
+	}
+	return newLine
+}
+
 formatInput.addEventListener("input", event => {
 	const unformattedText = event.target.value
 	formatOutput.value = ""
@@ -188,14 +198,7 @@ formatInput.addEventListener("input", event => {
 				}
 				else {
 					newLine = line + "<br>"
-					if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-					PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-					PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-					MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
-						newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
-						console.log()
-					}
-					
+					newLine = replaceSkillBonuses(newLine)
 					formatOutput.value += newLine + "\n"
 				}
 			}
@@ -225,14 +228,7 @@ formatInput.addEventListener("input", event => {
 			}
 			else if (bonus) {
 				newLine = line + "<br>"
-				if (INTELLECT.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-				PSYCHE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-				PHYSIQUE.includes(newLine.split(" ")[1].split(":")[0].toUpperCase()) || 
-				MOTORICS.includes(newLine.split(" ")[1].split(":")[0].toUpperCase())) {
-					newLine = newLine.replace(newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim(), `<span class='${checkSkillNames(newLine.split(" ")[1].split(":")[0].toUpperCase())[0]}'>` + newLine.split(":")[0].split("").filter(char => /^[A-Za-z\s]+$/.test(char)).join("").trim() + "</span>")
-					console.log()
-				}
-				
+				newLine = replaceSkillBonuses(newLine)
 				formatOutput.value += newLine + "\n"
 			}
 			else if (cleanLine === "BONUS START") {
