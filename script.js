@@ -261,7 +261,7 @@ formatInput.addEventListener("input", event => {
 				formatOutput.value += skill + " - " + newLine + "\n"
 			}
 		}
-		else {
+		else if (firstWord.length >= 1) {
 			newLine = `<p class='indent'><span class='hide'>${lastestSkill} - </span>` + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
 		}
