@@ -363,7 +363,8 @@
 #workskin span.whitecheck::before,
 #workskin span.whitecheck-locked::before,
 #workskin span.redcheck::before,
-#workskin span.pricheck::before {
+#workskin span.moneycheck::before,
+#workskin span.moneycheck-locked::before {
   content: '-\000a0';
   color: inherit;
 }
@@ -399,7 +400,9 @@
 
 #workskin .whitecheck,
 #workskin .whitecheck-locked,
-#workskin .redcheck {
+#workskin .redcheck,
+#workskin .moneycheck,
+#workskin .moneycheck-locked {
   border-top-right-radius: 20px 20px;
   border-top-left-radius: 20px 20px;
   border-bottom-right-radius: 30px 190px;
@@ -429,9 +432,24 @@
   background-color: #d64121;
 }
 
+#workskin .moneycheck {
+  background-color: #e3b734;
+}
+
+#workskin .moneycheck-locked {
+  background-color: #a37917;
+  color: #010803;
+}
+
 #workskin .whitecheck:hover,
 #workskin li.dialogue-check:hover > .whitecheck {
   background-color: #868070;
+  color: #fefbf4;
+}
+
+#workskin .moneycheck:hover,
+#workskin li.dialogue-check:hover > .moneycheck {
+  background-color: #a17f1b;
   color: #fefbf4;
 }
 
