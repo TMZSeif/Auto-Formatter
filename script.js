@@ -218,7 +218,7 @@ formatInput.addEventListener("input", event => {
 				newLine = "<p align='center'><span class='neutral'>" + cleanLine + "</span></p>"
 				formatOutput.value += newLine + "\n"
 			}
-			else if (cleanLine === "Temporary research bonus:" || cleanLine === "Permanent research bonus:") {
+			else if (cleanLine.toUpperCase() === "TEMPORARY RESEARCH BONUS:" || cleanLine.toUpperCase() === "PERMANENT RESEARCH BONUS:") {
 				newLine = "<p align='center'>" + cleanLine + "<br>"
 				formatOutput.value += newLine + "\n"
 				bonus = true
