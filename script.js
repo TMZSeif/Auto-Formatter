@@ -69,16 +69,16 @@ const checkSkillNames = (skill) => {
 		return ["mot"]
 	}
 	for (const item of skills) {
-		if (INTELLECT.includes(item.trim())) {
+		if (INTELLECT.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("int") 
 		}
-		if (PSYCHE.includes(item.trim())) {
+		if (PSYCHE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("psy")
 		}
-		if (PHYSIQUE.includes(item.trim())) {
+		if (PHYSIQUE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("fys")
 		}
-		if (MOTORICS.includes(item.trim())) {
+		if (MOTORICS.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("mot")
 		}
 	}
