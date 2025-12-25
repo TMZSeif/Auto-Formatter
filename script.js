@@ -14,27 +14,24 @@ const closeAlert = document.getElementById("closeAlert")
 const formatStylesheet = document.styleSheets[2]
 const resetButton = document.getElementById("reset")
 
-let INTELLECT = []
-let PSYCHE = []
-let PHYSIQUE = []
-let MOTORICS = []
+let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
+let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
+let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+		"HALF LIGHT", "PHYSIQUE", "FYS"]
+let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
+		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+let YOU = "YOU"
 
 if (localStorage.getItem("INT")) {
-	INTELLECT = localStorage.getItem("INT").split(",")
-	PSYCHE = localStorage.getItem("PSY").split(",")
-	PHYSIQUE = localStorage.getItem("FYS").split(",")
-	MOTORICS = localStorage.getItem("MOT").split(",")
-}
-else {
-	INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
-	PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
-	PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-		"HALF LIGHT", "PHYSIQUE", "FYS"]
-	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
-		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	INTELLECT = localStorage.getItem("INT").toUpperCase().split(",")
+	PSYCHE = localStorage.getItem("PSY").toUpperCase().split(",")
+	PHYSIQUE = localStorage.getItem("FYS").toUpperCase().split(",")
+	MOTORICS = localStorage.getItem("MOT").toUpperCase().split(",")
+	YOU = localStorage.getItem("YOU").toUpperCase()
 }
 
 if (localStorage.getItem("INTcolor")) {
+	formatStylesheet.cssRules[27].style.color = localStorage.getItem("YOUcolor")
 	formatStylesheet.cssRules[28].style.color = localStorage.getItem("INTcolor")
 	formatStylesheet.cssRules[29].style.color = localStorage.getItem("PSYcolor")
 	formatStylesheet.cssRules[30].style.color = localStorage.getItem("FYScolor")
@@ -109,7 +106,7 @@ const checkSkillNames = (skill) => {
 			types.push("mot")
 		}
 	}
-	if (skill === "YOU") {
+	if (skill === YOU) {
 		return ["you"]
 	}
 	if (types.length === 0) {
@@ -336,26 +333,31 @@ customButton.addEventListener("click", () => {
 	const PSY = document.getElementById("PSY")
 	const FYS = document.getElementById("FYS")
 	const MOT = document.getElementById("MOT")
+	const you = document.getElementById("YOU")
 	const INTcolor = document.getElementById("INTcolor")
 	const PSYcolor = document.getElementById("PSYcolor")
 	const FYScolor = document.getElementById("FYScolor")
 	const MOTcolor = document.getElementById("MOTcolor")
+	const YOUcolor = document.getElementById("YOUcolor")
 	if (localStorage.getItem("INTcolor")) {
 		INTcolor.value = localStorage.getItem("INTcolor")
 		PSYcolor.value = localStorage.getItem("PSYcolor")
 		FYScolor.value = localStorage.getItem("FYScolor")
 		MOTcolor.value = localStorage.getItem("MOTcolor")
+		YOUcolor.value = localStorage.getItem("YOUcolor")
 	}
 	else {
 		INTcolor.value = "#5cc1d7"
 		PSYcolor.value = "#7556cf"
 		FYScolor.value = "#cb476a"
 		MOTcolor.value = "#e3b734"
+		YOUcolor.value = "#c3d2db"
 	}
 	INT.value = [...INTELLECT].slice(0, -2).join(", ")
 	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
 	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
 	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
+	you.value = YOU
 })
 
 custom.addEventListener("submit", (event) => {
@@ -384,6 +386,12 @@ custom.addEventListener("submit", (event) => {
 				MOTORICS.forEach((value, idx, arr) => { arr[idx] = value.trim() })
 				MOTORICS.push("MOTORICS", "MOT")
 				break
+			case "YOU":
+				YOU = attribute[1].trim()
+				break
+			case "YOUcolor":
+				localStorage.setItem("YOUcolor", attribute[1])
+				formatStylesheet.cssRules[27].style.color = attribute[1]
 			case "INTcolor":
 				localStorage.setItem("INTcolor", attribute[1])
 				formatStylesheet.cssRules[28].style.color = attribute[1]
@@ -409,6 +417,7 @@ custom.addEventListener("submit", (event) => {
 	localStorage.setItem("PSY", PSYCHE)
 	localStorage.setItem("FYS", PHYSIQUE)
 	localStorage.setItem("MOT", MOTORICS)
+	localStorage.setItem("YOU", YOU)
 })
 
 closeAlert.addEventListener("click", () => {
@@ -429,22 +438,28 @@ resetButton.addEventListener("click", () => {
 		"HALF LIGHT", "PHYSIQUE", "FYS"]
 	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
 		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	YOU = "YOU"
 	const INT = document.getElementById("INT")
 	const PSY = document.getElementById("PSY")
 	const FYS = document.getElementById("FYS")
 	const MOT = document.getElementById("MOT")
+	const you = document.getElementById("YOU")
 	const INTcolor = document.getElementById("INTcolor")
 	const PSYcolor = document.getElementById("PSYcolor")
 	const FYScolor = document.getElementById("FYScolor")
 	const MOTcolor = document.getElementById("MOTcolor")
+	const YOUcolor = document.getElementById("YOUcolor")
+	you.value = YOU
 	INT.value = [...INTELLECT].slice(0, -2).join(", ")
 	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
 	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
 	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
+	YOUcolor.value = "#c3d2db"
 	INTcolor.value = "#5cc1d7"
 	PSYcolor.value = "#7556cf"
 	FYScolor.value = "#cb476a"
 	MOTcolor.value = "#e3b734"
+	formatStylesheet.cssRules[27].style.color = "#c3d2db"
 	formatStylesheet.cssRules[28].style.color = "#5cc1d7"
 	formatStylesheet.cssRules[29].style.color = "#7556cf"
 	formatStylesheet.cssRules[30].style.color = "#cb476a"
