@@ -12,12 +12,26 @@ const customButton = document.getElementById("custom-tab")
 const custom = document.getElementById("custom")
 const closeAlert = document.getElementById("closeAlert")
 
-let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
-let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
-let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-	"HALF LIGHT", "PHYSIQUE", "FYS"]
-let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
-	"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+let INTELLECT = []
+let PSYCHE = []
+let PHYSIQUE = []
+let MOTORICS = []
+
+if (localStorage.getItem("INT")) {
+	INTELLECT = localStorage.getItem("INT").split(",")
+	PSYCHE = localStorage.getItem("PSY").split(",")
+	PHYSIQUE = localStorage.getItem("FYS").split(",")
+	MOTORICS = localStorage.getItem("MOT").split(",")
+}
+else {
+	INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
+	PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
+	PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+		"HALF LIGHT", "PHYSIQUE", "FYS"]
+	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
+		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+}
+
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
 	"MORALE DAMAGED": "moraledmg", "MORALE CRITICAL": "moraledmg",
@@ -59,6 +73,7 @@ const createSkillDialogue = (type, line) => {
 const checkSkillNames = (skill) => {
 	const skills = skill.split(" AND ")
 	let types = []
+	console.log(INTELLECT, skill)
 	if (INTELLECT.includes(skill)) {
 		return ["int"]
 	}
@@ -349,17 +364,21 @@ custom.addEventListener("submit", (event) => {
 
 	const alertPlaceholder = document.getElementById("alertPlaceholder")
 	alertPlaceholder.classList.remove('visually-hidden');
-	setTimeout(function() {
-            alertPlaceholder.classList.add('show');
-    }, 100);
+	setTimeout(function () {
+		alertPlaceholder.classList.add('show');
+	}, 100);
+	localStorage.setItem("INT", INTELLECT)
+	localStorage.setItem("PSY", PSYCHE)
+	localStorage.setItem("FYS", PHYSIQUE)
+	localStorage.setItem("MOT", MOTORICS)
 })
 
 closeAlert.addEventListener("click", () => {
 	const alertPlaceholder = document.getElementById("alertPlaceholder")
-	setTimeout(function() {
-            alertPlaceholder.classList.remove('show');
-    }, 100);
-	setTimeout(function() {
-            alertPlaceholder.classList.add('visually-hidden');
-    }, 500);
+	setTimeout(function () {
+		alertPlaceholder.classList.remove('show');
+	}, 100);
+	setTimeout(function () {
+		alertPlaceholder.classList.add('visually-hidden');
+	}, 500);
 })
