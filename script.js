@@ -12,6 +12,7 @@ const customButton = document.getElementById("custom-tab")
 const custom = document.getElementById("custom")
 const closeAlert = document.getElementById("closeAlert")
 const formatStylesheet = document.styleSheets[2]
+const resetButton = document.getElementById("reset")
 
 let INTELLECT = []
 let PSYCHE = []
@@ -398,7 +399,7 @@ custom.addEventListener("submit", (event) => {
 		}
 	}
 
-	formatInput.dispatchEvent(new Event("input", { bubbles: true}))
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 	const alertPlaceholder = document.getElementById("alertPlaceholder")
 	alertPlaceholder.classList.remove('visually-hidden');
 	setTimeout(function () {
@@ -418,4 +419,35 @@ closeAlert.addEventListener("click", () => {
 	setTimeout(function () {
 		alertPlaceholder.classList.add('visually-hidden');
 	}, 500);
+})
+
+resetButton.addEventListener("click", () => {
+	localStorage.clear()
+	INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
+	PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
+	PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+		"HALF LIGHT", "PHYSIQUE", "FYS"]
+	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
+		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	const INT = document.getElementById("INT")
+	const PSY = document.getElementById("PSY")
+	const FYS = document.getElementById("FYS")
+	const MOT = document.getElementById("MOT")
+	const INTcolor = document.getElementById("INTcolor")
+	const PSYcolor = document.getElementById("PSYcolor")
+	const FYScolor = document.getElementById("FYScolor")
+	const MOTcolor = document.getElementById("MOTcolor")
+	INT.value = [...INTELLECT].slice(0, -2).join(", ")
+	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
+	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
+	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
+	INTcolor.value = "#5cc1d7"
+	PSYcolor.value = "#7556cf"
+	FYScolor.value = "#cb476a"
+	MOTcolor.value = "#e3b734"
+	formatStylesheet.cssRules[28].style.color = "#5cc1d7"
+	formatStylesheet.cssRules[29].style.color = "#7556cf"
+	formatStylesheet.cssRules[30].style.color = "#cb476a"
+	formatStylesheet.cssRules[31].style.color = "#e3b734"
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })
