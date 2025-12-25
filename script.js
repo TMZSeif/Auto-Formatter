@@ -8,6 +8,9 @@ const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
 const previewButton = document.getElementById("preview-tab")
 const preview = document.getElementById("previewInsert")
+const customButton = document.getElementById("custom-tab")
+const custom = document.getElementById("custom")
+const closeAlert = document.getElementById("closeAlert")
 
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
@@ -69,9 +72,8 @@ const checkSkillNames = (skill) => {
 		return ["mot"]
 	}
 	for (const item of skills) {
-		console.log(item.replace(/\s*\[.*?\]\s*/g))
 		if (INTELLECT.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-			types.push("int") 
+			types.push("int")
 		}
 		if (PSYCHE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("psy")
@@ -219,7 +221,6 @@ formatInput.addEventListener("input", event => {
 				bonus = false
 				thought = false
 				if (formatOutput.value.slice(-5, -1) === "<br>") {
-					console.log(formatOutput.value.slice(-5, -1))
 					formatOutput.value = formatOutput.value.slice(0, -1)
 					formatOutput.value += "</p>\n"
 				}
@@ -234,7 +235,6 @@ formatInput.addEventListener("input", event => {
 				else {
 					newLine = line + "<br>"
 					newLine = replaceSkillBonuses(newLine)
-					console.log(newLine)
 					formatOutput.value += newLine + "\n"
 				}
 			}
@@ -257,7 +257,6 @@ formatInput.addEventListener("input", event => {
 				bonus = false
 				item = false
 				if (formatOutput.value.slice(-5, -1) === "<br>") {
-					console.log(formatOutput.value.slice(-5, -1))
 					formatOutput.value = formatOutput.value.slice(0, -1)
 					formatOutput.value += "</p>\n"
 				}
@@ -306,4 +305,61 @@ copyButton.addEventListener("click", async () => {
 
 previewButton.addEventListener("click", () => {
 	preview.innerHTML = formatOutput.value
+})
+
+customButton.addEventListener("click", () => {
+	const INT = document.getElementById("INT")
+	const PSY = document.getElementById("PSY")
+	const FYS = document.getElementById("FYS")
+	const MOT = document.getElementById("MOT")
+	INT.value = [...INTELLECT].slice(0, -2).join(", ")
+	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
+	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
+	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
+})
+
+custom.addEventListener("submit", (event) => {
+	event.preventDefault()
+
+	const formData = new FormData(custom)
+	for (const attribute of formData) {
+		switch (attribute[0]) {
+			case "INT":
+				INTELLECT = attribute[1].split(",")
+				INTELLECT.forEach((value, idx, arr) => { arr[idx] = value.trim() })
+				INTELLECT.push("INTELLECT", "INT")
+				break
+			case "PSY":
+				PSYCHE = attribute[1].split(",")
+				PSYCHE.forEach((value, idx, arr) => { arr[idx] = value.trim() })
+				PSYCHE.push("PSYCHE", "PSY")
+				break
+			case "FYS":
+				PHYSIQUE = attribute[1].split(",")
+				PHYSIQUE.forEach((value, idx, arr) => { arr[idx] = value.trim() })
+				PHYSIQUE.push("PHYSIQUE", "FYS")
+				break
+			case "MOT":
+				MOTORICS = attribute[1].split(",")
+				MOTORICS.forEach((value, idx, arr) => { arr[idx] = value.trim() })
+				MOTORICS.push("MOTORICS", "MOT")
+				break
+		}
+	}
+
+	const alertPlaceholder = document.getElementById("alertPlaceholder")
+	alertPlaceholder.classList.remove('visually-hidden');
+	setTimeout(function() {
+            alertPlaceholder.classList.add('show');
+    }, 100);
+})
+
+closeAlert.addEventListener("click", () => {
+	const alertPlaceholder = document.getElementById("alertPlaceholder")
+	setTimeout(function() {
+            alertPlaceholder.classList.remove('show');
+    }, 100);
+	setTimeout(function() {
+            alertPlaceholder.classList.add('visually-hidden');
+    }, 500);
 })
