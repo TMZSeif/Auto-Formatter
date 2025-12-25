@@ -11,6 +11,7 @@ const preview = document.getElementById("previewInsert")
 const customButton = document.getElementById("custom-tab")
 const custom = document.getElementById("custom")
 const closeAlert = document.getElementById("closeAlert")
+const formatStylesheet = document.styleSheets[2]
 
 let INTELLECT = []
 let PSYCHE = []
@@ -30,6 +31,13 @@ else {
 		"HALF LIGHT", "PHYSIQUE", "FYS"]
 	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
 		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+}
+
+if (localStorage.getItem("INTcolor")) {
+	formatStylesheet.cssRules[28].style.color = localStorage.getItem("INTcolor")
+	formatStylesheet.cssRules[29].style.color = localStorage.getItem("PSYcolor")
+	formatStylesheet.cssRules[30].style.color = localStorage.getItem("FYScolor")
+	formatStylesheet.cssRules[31].style.color = localStorage.getItem("MOTcolor")
 }
 
 let CHECKS = {
@@ -327,6 +335,22 @@ customButton.addEventListener("click", () => {
 	const PSY = document.getElementById("PSY")
 	const FYS = document.getElementById("FYS")
 	const MOT = document.getElementById("MOT")
+	const INTcolor = document.getElementById("INTcolor")
+	const PSYcolor = document.getElementById("PSYcolor")
+	const FYScolor = document.getElementById("FYScolor")
+	const MOTcolor = document.getElementById("MOTcolor")
+	if (localStorage.getItem("INTcolor")) {
+		INTcolor.value = localStorage.getItem("INTcolor")
+		PSYcolor.value = localStorage.getItem("PSYcolor")
+		FYScolor.value = localStorage.getItem("FYScolor")
+		MOTcolor.value = localStorage.getItem("MOTcolor")
+	}
+	else {
+		INTcolor.value = "#5cc1d7"
+		PSYcolor.value = "#7556cf"
+		FYScolor.value = "#cb476a"
+		MOTcolor.value = "#e3b734"
+	}
 	INT.value = [...INTELLECT].slice(0, -2).join(", ")
 	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
 	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
@@ -359,9 +383,22 @@ custom.addEventListener("submit", (event) => {
 				MOTORICS.forEach((value, idx, arr) => { arr[idx] = value.trim() })
 				MOTORICS.push("MOTORICS", "MOT")
 				break
+			case "INTcolor":
+				localStorage.setItem("INTcolor", attribute[1])
+				formatStylesheet.cssRules[28].style.color = attribute[1]
+			case "PSYcolor":
+				localStorage.setItem("PSYcolor", attribute[1])
+				formatStylesheet.cssRules[29].style.color = attribute[1]
+			case "FYScolor":
+				localStorage.setItem("FYScolor", attribute[1])
+				formatStylesheet.cssRules[30].style.color = attribute[1]
+			case "MOTcolor":
+				localStorage.setItem("MOTcolor", attribute[1])
+				formatStylesheet.cssRules[31].style.color = attribute[1]
 		}
 	}
 
+	formatInput.dispatchEvent(new Event("input", { bubbles: true}))
 	const alertPlaceholder = document.getElementById("alertPlaceholder")
 	alertPlaceholder.classList.remove('visually-hidden');
 	setTimeout(function () {

@@ -324,40 +324,57 @@
 				aria-labelledby="skills-tab-pane" tabindex="0">
 				<div class="container-fluid bg-dark-subtle flex-grow-1" data-bs-theme="dark">
 					<div class="container">
-						<div id="alertPlaceholder" class="alert alert-warning alert-dismissible visually-hidden fade" role="alert">
+						<div id="alertPlaceholder" class="alert alert-warning alert-dismissible visually-hidden fade"
+							role="alert">
 							<div>Custom formatting has been saved.</div>
 							<button type="button" class="btn-close" id="closeAlert" aria-label="Close"></button>
 						</div>
 						<form id="custom">
 							<h1 class="text-light text-center">Custom Skills</h1>
-							<div class="mb-3">
+							<div class="mb-3 d-flex flex-column">
 								<label for="INT" class="form-label text-light">INTELLECT</label>
-								<input required name="INT" type="text" class="form-control" id="INT"
-									aria-describedby="INThelp">
+								<div class="d-flex">
+									<input required name="INTcolor" type="color" class="form-control form-control-color"
+										id="INTcolor">
+									<input required name="INT" type="text" class="form-control" id="INT"
+										aria-describedby="INThelp">
+								</div>
 								<div id="INThelp" class="form-text">
 									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
 								</div>
 							</div>
-							<div class="mb-3">
+							<div class="mb-3 d-flex flex-column">
 								<label for="PSY" class="form-label text-light">PSYCHE</label>
-								<input required name="PSY" type="text" class="form-control" id="PSY"
-									aria-describedby="PSYhelp">
+								<div class="d-flex">
+									<input required name="PSYcolor" type="color" class="form-control form-control-color"
+										id="PSYcolor">
+									<input required name="PSY" type="text" class="form-control" id="PSY"
+										aria-describedby="PSYhelp">
+								</div>
 								<div id="PSYhelp" class="form-text">
 									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
 								</div>
 							</div>
-							<div class="mb-3">
+							<div class="mb-3 d-flex flex-column">
 								<label for="FYS" class="form-label text-light">PHYSIQUE</label>
-								<input required name="FYS" type="text" class="form-control" id="FYS"
-									aria-describedby="FYShelp">
+								<div class="d-flex">
+									<input required name="FYScolor" type="color" class="form-control form-control-color"
+										id="FYScolor">
+									<input required name="FYS" type="text" class="form-control" id="FYS"
+										aria-describedby="FYShelp">
+								</div>
 								<div id="FYShelp" class="form-text">
 									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
 								</div>
 							</div>
-							<div class="mb-3">
+							<div class="mb-3 d-flex flex-column">
 								<label for="MOT" class="form-label text-light">MOTORICS</label>
-								<input required name="MOT" type="text" class="form-control" id="MOT"
-									aria-describedby="MOThelp">
+								<div class="d-flex">
+									<input required name="MOTcolor" type="color" class="form-control form-control-color"
+										id="MOTcolor">
+									<input required name="MOT" type="text" class="form-control" id="MOT"
+										aria-describedby="MOThelp">
+								</div>
 								<div id="MOThelp" class="form-text">
 									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL". Skills
 									like PERCEPTION will need all of their variants to be added as well
