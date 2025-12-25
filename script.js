@@ -9,18 +9,30 @@ const copyButton = document.getElementById("copyBtn")
 const previewButton = document.getElementById("preview-tab")
 const preview = document.getElementById("previewInsert")
 const customButton = document.getElementById("custom-tab")
-const custom = document.getElementById("custom")
+const customSkills = document.getElementById("customSkills")
 const closeAlert = document.getElementById("closeAlert")
 const formatStylesheet = document.styleSheets[2]
-const resetButton = document.getElementById("reset")
+const resetSkillsButton = document.getElementById("resetSkills")
+const customChecks = document.getElementById("customChecks")
+const resetChecks = document.getElementById("resetChecks")
 
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-		"HALF LIGHT", "PHYSIQUE", "FYS"]
+	"HALF LIGHT", "PHYSIQUE", "FYS"]
 let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
-		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
 let YOU = "YOU"
+let CHECKS = {
+	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
+	"DAMAGED MORALE": "moraledmg", "MORALE CRITICAL": "moraledmg",
+	"HEALED MORALE": "moraleheal", "DAMAGED HEALTH": "healthdmg", "HEALTH CRITICAL": "healthdmg",
+	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal",
+	"PSYCHE RAISED": "moraledmg",
+	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
+}
+let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
+	"BREAKTHROUGH IMMINENT:"]
 
 if (localStorage.getItem("INT")) {
 	INTELLECT = localStorage.getItem("INT").toUpperCase().split(",")
@@ -38,16 +50,21 @@ if (localStorage.getItem("INTcolor")) {
 	formatStylesheet.cssRules[31].style.color = localStorage.getItem("MOTcolor")
 }
 
-let CHECKS = {
-	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
-	"DAMAGED MORALE": "moraledmg", "MORALE CRITICAL": "moraledmg",
-	"HEALED MORALE": "moraleheal", "DAMAGED HEALTH": "healthdmg", "HEALTH CRITICAL": "healthdmg",
-	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal",
-	"PSYCHE RAISED": "moraledmg",
-	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
+if (localStorage.getItem("checks")) {
+	for (const [name, colors] of Object.entries(JSON.parse(localStorage.getItem("checks")))) {
+		CHECKS[name.toUpperCase().trim()] = name.toLowerCase().trim()
+		formatStylesheet.insertRule(`#workskin .${name.toLowerCase().trim()} {
+			color: ${colors[0]};
+  background-color: ${colors[1]};
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+		}`, formatStylesheet.cssRules.length)
+	}
 }
-let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
-	"BREAKTHROUGH IMMINENT:"]
 
 const createSkillDialogue = (type, line) => {
 	const skillCheck = line.split(" - ")[0]
@@ -360,10 +377,10 @@ customButton.addEventListener("click", () => {
 	you.value = YOU
 })
 
-custom.addEventListener("submit", (event) => {
+customSkills.addEventListener("submit", (event) => {
 	event.preventDefault()
 
-	const formData = new FormData(custom)
+	const formData = new FormData(customSkills)
 	for (const attribute of formData) {
 		switch (attribute[0]) {
 			case "INT":
@@ -392,18 +409,23 @@ custom.addEventListener("submit", (event) => {
 			case "YOUcolor":
 				localStorage.setItem("YOUcolor", attribute[1])
 				formatStylesheet.cssRules[27].style.color = attribute[1]
+				break
 			case "INTcolor":
 				localStorage.setItem("INTcolor", attribute[1])
 				formatStylesheet.cssRules[28].style.color = attribute[1]
+				break
 			case "PSYcolor":
 				localStorage.setItem("PSYcolor", attribute[1])
 				formatStylesheet.cssRules[29].style.color = attribute[1]
+				break
 			case "FYScolor":
 				localStorage.setItem("FYScolor", attribute[1])
 				formatStylesheet.cssRules[30].style.color = attribute[1]
+				break
 			case "MOTcolor":
 				localStorage.setItem("MOTcolor", attribute[1])
 				formatStylesheet.cssRules[31].style.color = attribute[1]
+				break
 		}
 	}
 
@@ -430,8 +452,17 @@ closeAlert.addEventListener("click", () => {
 	}, 500);
 })
 
-resetButton.addEventListener("click", () => {
-	localStorage.clear()
+resetSkillsButton.addEventListener("click", () => {
+	localStorage.removeItem("INT")
+	localStorage.removeItem("PSY")
+	localStorage.removeItem("FYS")
+	localStorage.removeItem("MOT")
+	localStorage.removeItem("YOU")
+	localStorage.removeItem("YOUcolor")
+	localStorage.removeItem("INTcolor")
+	localStorage.removeItem("PSYcolor")
+	localStorage.removeItem("FYScolor")
+	localStorage.removeItem("MOTcolor")
 	INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
 	PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
 	PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
@@ -464,5 +495,55 @@ resetButton.addEventListener("click", () => {
 	formatStylesheet.cssRules[29].style.color = "#7556cf"
 	formatStylesheet.cssRules[30].style.color = "#cb476a"
 	formatStylesheet.cssRules[31].style.color = "#e3b734"
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
+})
+
+customChecks.addEventListener("submit", (event) => {
+	event.preventDefault()
+
+	const formData = new FormData(customChecks)
+	let data = []
+	for (attribute of formData) {
+		data.push(attribute)
+	}
+	CHECKS[data[0][1].toUpperCase().trim()] = data[0][1].replace(" ", "").replace(/[^a-zA-Z]/g, '').toLowerCase().trim()
+	formatStylesheet.insertRule(`#workskin .${data[0][1].replace(" ", "").replace(/[^a-zA-Z]/g, '').toLowerCase().trim()} {
+			color: ${data[1][1]};
+  background-color: ${data[2][1]};
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+		}`, formatStylesheet.cssRules.length)
+	if (localStorage.getItem("checks")) {
+		let newObject = JSON.parse(localStorage.getItem("checks"))
+		newObject[data[0][1]] = [data[1][1], data[2][1]]
+		localStorage.setItem("checks", JSON.stringify(newObject))
+	}
+	else {
+		let newObject = {}
+		newObject[data[0][1]] = [data[1][1], data[2][1]]
+		localStorage.setItem("checks", JSON.stringify(newObject))
+	}
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
+	const alertPlaceholder = document.getElementById("alertPlaceholder")
+	alertPlaceholder.classList.remove('visually-hidden');
+	setTimeout(function () {
+		alertPlaceholder.classList.add('show');
+	}, 100);
+})
+
+resetChecks.addEventListener("click", () => {
+	localStorage.removeItem("checks")
+	CHECKS = {
+		"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
+		"DAMAGED MORALE": "moraledmg", "MORALE CRITICAL": "moraledmg",
+		"HEALED MORALE": "moraleheal", "DAMAGED HEALTH": "healthdmg", "HEALTH CRITICAL": "healthdmg",
+		"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal",
+		"PSYCHE RAISED": "moraledmg",
+		"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
+	}
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })

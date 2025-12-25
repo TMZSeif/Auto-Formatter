@@ -327,7 +327,7 @@
 							<div>Custom formatting has been saved.</div>
 							<button type="button" class="btn-close" id="closeAlert" aria-label="Close"></button>
 						</div>
-						<form id="custom">
+						<form id="customSkills">
 							<h1 class="text-light text-center">Custom Skills</h1>
 							<div class="mb-3 d-flex flex-column">
 								<label for="INT" class="form-label text-light">INTELLECT</label>
@@ -387,7 +387,29 @@
 								</div>
 							</div>
 							<button type="submit" class="btn btn-success">Save</button>
-							<button type="button" id="reset" class="btn btn-secondary">Reset to default</button>
+							<button type="button" id="resetSkills" class="btn btn-secondary">Reset to default</button>
+						</form>
+						<form id="customChecks">
+							<h1 class="text-light text-center">Custom Checks</h1>
+							<div class="mb-3 d-flex flex-column">
+								<label for="check" class="form-label text-light">Check results</label>
+								<div class="d-flex w-50">
+									<input required name="check" type="text" class="form-control" id="check"
+										aria-describedby="checkhelp">
+									<input value="#e2e2e2" required name="textColour" type="color"
+										class="form-control form-control-color" id="textColour">
+									<input required name="bgColour" type="color" class="form-control form-control-color"
+										id="bgColour">
+								</div>
+								<div id="checkhelp" class="form-text">
+									Place into the text box the Keyword (ex. CHECK SUCCESS) you wish to associate with
+									the check result. The first color is for text and the second color is for the
+									background. To edit an already pre-existing Check Result simply enter the name of
+									the Keyword and edit the color to your liking and it will update automatically
+								</div>
+							</div>
+							<button type="submit" class="btn btn-success">Save</button>
+							<button type="button" id="resetChecks" class="btn btn-secondary">Reset to default</button>
 						</form>
 					</div>
 				</div>
