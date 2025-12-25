@@ -43,8 +43,8 @@ if (localStorage.getItem("INTcolor")) {
 
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
-	"MORALE DAMAGED": "moraledmg", "MORALE CRITICAL": "moraledmg",
-	"HEALED MORALE": "moraleheal", "HEALTH DAMAGED": "healthdmg", "HEALTH CRITICAL": "healthdmg",
+	"DAMAGED MORALE": "moraledmg", "MORALE CRITICAL": "moraledmg",
+	"HEALED MORALE": "moraleheal", "DAMAGED HEALTH": "healthdmg", "HEALTH CRITICAL": "healthdmg",
 	"HEALED HEALTH": "healthheal", "INTELLECT RAISED": "moraleheal", "PHYSIQUE RAISED": "healthheal",
 	"PSYCHE RAISED": "moraledmg",
 	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
