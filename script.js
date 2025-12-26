@@ -100,17 +100,17 @@ const createSkillDialogue = (type, line) => {
 const checkSkillNames = (skill) => {
 	const skills = skill.split(" AND ")
 	let types = []
-	console.log(INTELLECT, skill)
-	if (INTELLECT.includes(skill)) {
+	console.log(skill.split("[")[0].trim())
+	if (INTELLECT.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 		return ["int"]
 	}
-	if (PSYCHE.includes(skill)) {
+	if (PSYCHE.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 		return ["psy"]
 	}
-	if (PHYSIQUE.includes(skill)) {
+	if (PHYSIQUE.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 		return ["fys"]
 	}
-	if (MOTORICS.includes(skill)) {
+	if (MOTORICS.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 		return ["mot"]
 	}
 	for (const item of skills) {
@@ -324,7 +324,6 @@ formatInput.addEventListener("input", event => {
 			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.replace(/[^a-zA-Z]/g, '').length > 1) {
-			console.log(firstWord)
 			const types = checkSkillNames(cleanLine.split(" - ")[0])
 			if (types.length === 1) {
 				[newLine, lastestSkill] = createSkillDialogue(types[0], cleanLine)
