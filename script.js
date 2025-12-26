@@ -3,6 +3,7 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 	trigger: 'focus'
 }))
 
+// List of bullsh#t HTML stuff to import
 const formatInput = document.getElementById("formatInput")
 const formatOutput = document.getElementById("formatOutput")
 const copyButton = document.getElementById("copyBtn")
@@ -16,6 +17,7 @@ const resetSkillsButton = document.getElementById("resetSkills")
 const customChecks = document.getElementById("customChecks")
 const resetChecks = document.getElementById("resetChecks")
 
+// All the stuff that can be changed and need to be kept track of
 let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
 let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
 let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
@@ -34,6 +36,7 @@ let CHECKS = {
 let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
 	"BREAKTHROUGH IMMINENT:"]
 
+// ugly looking conditional for updating custom stuff based on cached data
 if (localStorage.getItem("INT")) {
 	INTELLECT = localStorage.getItem("INT").toUpperCase().split(",")
 	PSYCHE = localStorage.getItem("PSY").toUpperCase().split(",")
@@ -41,7 +44,7 @@ if (localStorage.getItem("INT")) {
 	MOTORICS = localStorage.getItem("MOT").toUpperCase().split(",")
 	YOU = localStorage.getItem("YOU").toUpperCase()
 }
-
+// look at all these mAgIc nUmBeRs ooooo spoooky
 if (localStorage.getItem("INTcolor")) {
 	formatStylesheet.cssRules[27].style.color = localStorage.getItem("YOUcolor")
 	formatStylesheet.cssRules[28].style.color = localStorage.getItem("INTcolor")
@@ -66,6 +69,7 @@ if (localStorage.getItem("checks")) {
 	}
 }
 
+//List of helper functions
 const createSkillDialogue = (type, line) => {
 	const skillCheck = line.split(" - ")[0]
 	const text = line.split(" - ").splice(1).join(" - ")
@@ -113,14 +117,17 @@ const checkSkillNames = (skill) => {
 		if (INTELLECT.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("int")
 		}
-		if (PSYCHE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
+		else if (PSYCHE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("psy")
 		}
-		if (PHYSIQUE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
+		else if (PHYSIQUE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("fys")
 		}
-		if (MOTORICS.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
+		else if (MOTORICS.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			types.push("mot")
+		}
+		else {
+			types.push("neutral")
 		}
 	}
 	if (skill === YOU) {
@@ -206,6 +213,7 @@ const replaceSkillBonuses = (newLine) => {
 	return newLine
 }
 
+// Main formatting event loop
 formatInput.addEventListener("input", event => {
 	const unformattedText = event.target.value
 	formatOutput.value = ""
@@ -254,6 +262,7 @@ formatInput.addEventListener("input", event => {
 			newLine = "<p class='task'>" + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
 		}
+		// These next two are ugly as b#lls but I have neither the care nor the motivation to make it better
 		else if (thought) {
 			if (cleanLine === "END THOUGHT") {
 				bonus = false
@@ -325,7 +334,12 @@ formatInput.addEventListener("input", event => {
 				[newLine, lastestSkill] = createSkillDialogue("neutral", cleanLine)
 				let skill = "<p>"
 				for (let word of cleanLine.split(" - ")[0].split(" AND ")) {
-					skill += `<span class='${checkSkillNames(word)[0]}'>` + word + "</span><span class='neutral'> AND </span>"
+					let check = ""
+					if (word.split("[").length !== 1) {
+						check = word.split("[")[1].split("]")[0]
+						check = `<span class='check'>[${check}]</span>`
+					}
+					skill += `<span class='${checkSkillNames(word)[0]}'>` + word.split("[")[0] + "</span>" + check +"<span class='neutral'> AND </span>"
 				}
 				newLine = newLine.split(" - ").slice(1).join(" - ")
 				formatOutput.value += skill.slice(0, -34) + " - " + newLine + "\n"
@@ -338,6 +352,7 @@ formatInput.addEventListener("input", event => {
 	}
 })
 
+// Button events
 copyButton.addEventListener("click", async () => {
 	await navigator.clipboard.writeText(formatOutput.value)
 })
@@ -380,7 +395,7 @@ customButton.addEventListener("click", () => {
 
 customSkills.addEventListener("submit", (event) => {
 	event.preventDefault()
-
+	// Yandere simulator ahh switch case
 	const formData = new FormData(customSkills)
 	for (const attribute of formData) {
 		switch (attribute[0]) {
@@ -453,6 +468,7 @@ closeAlert.addEventListener("click", () => {
 	}, 500);
 })
 
+// Big ol' red button that deletes everything. Press on occasion if one is bored
 resetSkillsButton.addEventListener("click", () => {
 	localStorage.removeItem("INT")
 	localStorage.removeItem("PSY")
@@ -499,6 +515,8 @@ resetSkillsButton.addEventListener("click", () => {
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })
 
+// The way this is done makes me wanna hurl but I suppose
+// that's what I get for daring to f#ck with the CSSOM
 customChecks.addEventListener("submit", (event) => {
 	event.preventDefault()
 
@@ -536,6 +554,7 @@ customChecks.addEventListener("submit", (event) => {
 	}, 100);
 })
 
+// Red button that deletes everything numero dos
 resetChecks.addEventListener("click", () => {
 	localStorage.removeItem("checks")
 	CHECKS = {
