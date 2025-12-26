@@ -243,7 +243,7 @@ formatInput.addEventListener("input", event => {
 			newLine = `<p align='center'><span class='${checkChecks(cleanLine)}'>` + cleanLine + "</span></p>"
 			formatOutput.value += newLine + "\n"
 		}
-		else if (checkKeywords(cleanLine) || (cleanLine.includes("xp") && cleanLine.length < 10)) {
+		else if (checkKeywords(cleanLine) || (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10)) {
 			lastestSkill = ""
 			if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
 				thought = true
@@ -314,7 +314,8 @@ formatInput.addEventListener("input", event => {
 				formatOutput.value += newLine + "\n"
 			}
 		}
-		else if (firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
+		else if (firstWord === firstWord.toUpperCase() && firstWord.replace(/[^a-zA-Z]/g, '').length > 1) {
+			console.log(firstWord)
 			const types = checkSkillNames(cleanLine.split(" - ")[0])
 			if (types.length === 1) {
 				[newLine, lastestSkill] = createSkillDialogue(types[0], cleanLine)
