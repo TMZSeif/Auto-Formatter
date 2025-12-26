@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="format.css">
 </head>
 
-<body>
-	<div class="container-fluid d-flex flex-column px-0">
+<body class="d-flex flex-column">
+	<div class="container-fluid px-0 flex-grow-1 d-flex flex-column">
 		<nav class="navbar navbar-expand-lg bg-light-subtle" data-bs-theme="dark">
 			<div class="container-fluid flex-column">
 				<h1 class="text-light mb-0 pb-0 text-center">AUTO-FORMATTER</h1>
@@ -25,7 +25,7 @@
 					writing into the Fury of a Shattered Mirror AO3 workskin</p>
 			</div>
 		</nav>
-		<ul class="nav nav-tabs bg-body-tertiary nav-fill" data-bs-theme="dark" id="myTab" role="tablist">
+		<ul class="nav nav-tabs bg-body-tertiary nav-fill sticky-top" data-bs-theme="dark" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
 				<button class="nav-link active" id="format-tab" data-bs-toggle="tab" data-bs-target="#format-tab-pane"
 					type="button" role="tab" aria-controls="format-tab-pane" aria-selected="true">Formatter</button>
@@ -48,10 +48,10 @@
 					role="tab" aria-controls="bg-tab-pane" aria-selected="false">Custom Background</button>
 			</li>
 		</ul>
-		<div class="tab-content flex-grow-1 d-flex flex-column" id="nav-tabContent">
-			<div class="tab-pane fade show active flex-grow-1" id="format-tab-pane" role="tabpanel"
+		<div class="d-flex flex-cloumn tab-content w-100 flex-grow-1" id="nav-tabContent">
+			<div class="tab-pane fade show active flex-grow-1 w-100" id="format-tab-pane" role="tabpanel"
 				aria-labelledby="format-tab-pane" tabindex="0">
-				<div class="container-fluid bg-dark-subtle flex-grow-1 d-flex flex-column" data-bs-theme="dark">
+				<div class="bg-dark-subtle h-100 d-flex flex-column" data-bs-theme="dark">
 					<div class="container-fluid d-flex flex-grow-1">
 						<div class="mb-3 me-3 d-flex flex-column flex-grow-1">
 							<textarea class="form-control flex-grow-1 mt-3 format-input"
@@ -69,9 +69,9 @@
 						Text</a>
 				</div>
 			</div>
-			<div class="tab-pane fade flex-grow-1" id="preview-tab-pane" role="tabpanel"
+			<div class="tab-pane fade flex-grow-1 w-100" id="preview-tab-pane" role="tabpanel"
 				aria-labelledby="preview-tab-pane" tabindex="0">
-				<div class="container-fluid flex-grow-1 d-flex justify-content-center flex-cloumn bg-dark-subtle"
+				<div class="h-100 d-flex justify-content-center flex-cloumn bg-dark-subtle"
 					data-bs-theme="dark">
 					<div id="workskin">
 						<div id="chapters">
@@ -89,23 +89,23 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade flex-grow-1" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab-pane"
+			<div class="tab-pane fade flex-grow-1 w-100" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab-pane"
 				tabindex="0">
-				<div class="container-fluid bg-dark-subtle flex-grow-1" data-bs-theme="dark">
-					<h1 class="text-light text-center">Synopsis</h1>
-					<p class="text-light text-center">This formatter is based on the Fury of a Shattered Mirror
+				<div class="container-fluid bg-dark-subtle h-100" data-bs-theme="dark">
+					<h1 class="text text-light text-center">Synopsis</h1>
+					<p class="text text-light text-center">This formatter is based on the Fury of a Shattered Mirror
 						workskin
 						yet the inbuilt functionality extends only to the classic DE system. So any of the unique
 						formatting in FoaSM that doesn not exist in DE will not be present out of the box. You'll
 						have
 						to extend that functionality yourself.</p>
-					<p class="text-light text-center">Now this formatter was originally intended to be a place where
+					<p class="text text-light text-center">Now this formatter was originally intended to be a place where
 						you
 						can copy your already written text into it and immediately get your fully CSS and HTML
 						formatted
 						text back. But technically you <em>can</em> write directly in here if you so wish. Nothing
 						stopping you either way.</p>
-					<p class="text-light text-center">Note: This formatter uses Markdown to detect unique styling
+					<p class="text text-light text-center">Note: This formatter uses Markdown to detect unique styling
 						such
 						as italics or bolding. If you're writing on another application make sure to copy your text
 						as
@@ -115,36 +115,36 @@
 						bolded** and if you want to place stars without making something italic or bold preface the
 						star
 						with a backslash \*like so\*</p>
-					<h1 class="text-light text-center">Skill Dialogue</h1>
-					<p class="text-light text-center">When creating Skill dialogue, all Skill names must be fully
+					<h1 class="text text-light text-center">Skill Dialogue</h1>
+					<p class="text text-light text-center">When creating Skill dialogue, all Skill names must be fully
 						capitalized.</p>
-					<p class="text-light text-center">This here is the guideline for how Skill dialogues should be
+					<p class="text text-light text-center">This here is the guideline for how Skill dialogues should be
 						formatted <code>SKILL NAME - Text here</code>. If the capitalized <code>SKILL NAME</code> is
 						not
 						the name of a pre-existing Skill then it is automatically the 'neutral' class and assumed
 						to be a descriptor like <code>DESCRIPTION - Hey look at me!</code></p>
-					<p class="text-light text-center">If you wish to add a check there must be a space between the
+					<p class="text text-light text-center">If you wish to add a check there must be a space between the
 						Skill
 						and the check like so <code>SKILL [Medium:Success] - There's a space there.</code></p>
-					<p class="text-light text-center">Multi Skill dialogue work but you cannot add checks to them
+					<p class="text text-light text-center">Multi Skill dialogue work but you cannot add checks to them
 						<code>SKILL AND OTHER SKILL - This will be picked up fine but checks won't work here.</code>
 					</p>
-					<p class="text-light text-center">Multi line Skill dialogue will also work perfectly fine and
+					<p class="text text-light text-center">Multi line Skill dialogue will also work perfectly fine and
 						functions as so.</p>
 					<pre><code style="color: #e685b5;">
 						SKILL - I have my line here.
 
 						And I continue talking in another paragraph.
 					</code></pre>
-					<h1 class="text-light text-center">Dialogue Trees</h1>
-					<p class="text-light text-center">Dialogue trees are created by making numbered lists like so.
+					<h1 class="text text-light text-center">Dialogue Trees</h1>
+					<p class="text text-light text-center">Dialogue trees are created by making numbered lists like so.
 					</p>
 					<pre><code style="color: #e685b5;">
 						1. Dialogue #1
 						2. Dialogue #2
 						3. Dialogue #3
 					</code></pre>
-					<p class="text-light text-center">To indicate that a particular dialogue was chosen and
+					<p class="text text-light text-center">To indicate that a particular dialogue was chosen and
 						completed,
 						italicise the dialogue like so</p>
 					<pre><code style="color: #e685b5;">
@@ -152,7 +152,7 @@
 						2. This has not
 						3. *This also has been chosen*
 					</code></pre>
-					<p class="text-light text-center">To create a white check you must add a W to the end of the
+					<p class="text text-light text-center">To create a white check you must add a W to the end of the
 						line.
 						The W <em>must</em> be the last character of the line. To indicate a locked white check you
 						also
@@ -166,9 +166,9 @@
 						4. *[20000$] This is a locked money check. M*
 						5. [Physical Instrument - Medium 11] This is a red check. R
 					</code></pre>
-					<p class="text-light text-center">Note: You must leave a blank line before and after the list.</p>
-					<h1 class="text-light text-center">Check Results And Rolling</h1>
-					<p class="text-light text-center">There are certain occasions when you'll need a line to be both
+					<p class="text text-light text-center">Note: You must leave a blank line before and after the list.</p>
+					<h1 class="text text-light text-center">Check Results And Rolling</h1>
+					<p class="text text-light text-center">There are certain occasions when you'll need a line to be both
 						centered and italicised. Such as when making modifiers to checks or what have you. In order
 						to
 						do this simply wrap a line in italics and it'll center it for you like so</p>
@@ -178,7 +178,7 @@
 						*This text will also be centered and italicised*
 						*Now playing: Music (Discorune reference)*
 					</code></pre>
-					<p class="text-light text-center">Now for big active check results such as CHECK SUCCESS or
+					<p class="text text-light text-center">Now for big active check results such as CHECK SUCCESS or
 						HEALED
 						MORALE. They will have to be placed on their own line and be fully capitalized. You'll also
 						need
@@ -208,16 +208,16 @@
 						MONEY GAINED
 						MONEY SPENT
 					</code></pre>
-					<p class="text-light text-center">Warning: If you write a fully capitalized Keyword from the
+					<p class="text text-light text-center">Warning: If you write a fully capitalized Keyword from the
 						above
 						following in a normal paragraph. That entire paragraph will be formatted into a check result
 						for
 						example</p>
-					<p class="text-light text-center"><code>
+					<p class="text text-light text-center"><code>
 						INTERFACING - If I write CHECK SUCCESS. This entire line now will be formatted as a giant CHECK SUCCESS block and not a Skill dialogue.
 					</code></p>
-					<h1 class="text-light text-center">Tasks And Other Similarly Formatted Keyword</h1>
-					<p class="text-light text-center">Tasks, Thoughts, Items and XP all have the same green
+					<h1 class="text text-light text-center">Tasks And Other Similarly Formatted Keyword</h1>
+					<p class="text text-light text-center">Tasks, Thoughts, Items and XP all have the same green
 						formatting.
 						And like the above Check Results, are formatted by detecting keywords such as New task: or
 						Task
@@ -231,17 +231,17 @@
 						Thought gained:
 						Breakthrough imminent:
 					</code></pre>
-					<p class="text-light text-center">Note: The ":" <em>must</em> be present or it won't be
+					<p class="text text-light text-center">Note: The ":" <em>must</em> be present or it won't be
 						formatted
 						correctly</p>
-					<p class="text-light text-center">Warning: For reasons that will be apparent in their relevant
+					<p class="text text-light text-center">Warning: For reasons that will be apparent in their relevant
 						sections. You must add END ITEM or END THOUGHT on a new line immediately after Thought
 						Gained,
 						Breakthrough Imminent or Item gained if you won't be creating a full Item description or
 						Thought
 						description.</p>
-					<h1 class="text-light text-center">Thought and Item Description</h1>
-					<p class="text-light text-center">After a Thought gained: is added. Any fully capitalized line
+					<h1 class="text text-light text-center">Thought and Item Description</h1>
+					<p class="text text-light text-center">After a Thought gained: is added. Any fully capitalized line
 						will
 						be formatted as the Thought's name and will be formatted to be center aligned and bolded.
 						Any
@@ -291,11 +291,11 @@
 						All FYS learning caps raised by 1
 						END THOUGHT
 					</code></pre>
-					<p class="text-light text-center">Pain Threshold and FYS will automatically be highlighted
+					<p class="text text-light text-center">Pain Threshold and FYS will automatically be highlighted
 						accordingly. The END THOUGHT Keyword <em>must</em> be added before you continue normal
 						writing.
 					</p>
-					<p class="text-light text-center">The same exact logic applies for Item descriptions except
+					<p class="text text-light text-center">The same exact logic applies for Item descriptions except
 						BONUS
 						START needs to be prefaced before you write bonuses like so</p>
 					<pre><code style="color: #e685b5;">
@@ -313,13 +313,13 @@
 						-1 Inland Empire: Don't even care
 						END ITEM
 					</code></pre>
-					<p class="text-light text-center">Note: As said previously even if you don't place an Item or
+					<p class="text text-light text-center">Note: As said previously even if you don't place an Item or
 						Thought description. END ITEM and END THOUGHT must still be appended at the end.</p>
 				</div>
 			</div>
-			<div class="tab-pane fade flex-grow-1" id="custom-tab-pane" role="tabpanel"
+			<div class="tab-pane fade flex-grow-1 w-100" id="custom-tab-pane" role="tabpanel"
 				aria-labelledby="skills-tab-pane" tabindex="0">
-				<div class="container-fluid bg-dark-subtle flex-grow-1" data-bs-theme="dark">
+				<div class="bg-dark-subtle h-100" data-bs-theme="dark">
 					<div class="container">
 						<div id="alertPlaceholder" class="alert alert-warning alert-dismissible visually-hidden fade"
 							role="alert">
@@ -413,7 +413,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade flex-grow-1" id="bg-tab-pane" role="tabpanel" aria-labelledby="bg-tab-pane"
+			<div class="tab-pane fade flex-grow-1 w-100" id="bg-tab-pane" role="tabpanel" aria-labelledby="bg-tab-pane"
 				tabindex="0">...
 			</div>
 
