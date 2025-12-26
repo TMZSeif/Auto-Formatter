@@ -247,21 +247,6 @@ formatInput.addEventListener("input", event => {
 			newLine = "<p align='center'><em>" + cleanLine + "</em></p>"
 			formatOutput.value += newLine + "\n"
 		}
-		else if (checkChecks(cleanLine) && cleanLine === cleanLine.toUpperCase()) {
-			newLine = `<p align='center'><span class='${checkChecks(cleanLine)}'>` + cleanLine + "</span></p>"
-			formatOutput.value += newLine + "\n"
-		}
-		else if (checkKeywords(cleanLine) || (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10)) {
-			lastestSkill = ""
-			if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
-				thought = true
-			}
-			if (checkKeywords(cleanLine).toUpperCase() === "ITEM GAINED:") {
-				item = true
-			}
-			newLine = "<p class='task'>" + cleanLine + "</p>"
-			formatOutput.value += newLine + "\n"
-		}
 		// These next two are ugly as b#lls but I have neither the care nor the motivation to make it better
 		else if (thought) {
 			if (cleanLine === "END THOUGHT") {
@@ -322,6 +307,21 @@ formatInput.addEventListener("input", event => {
 				newLine = "<p align='center'>" + cleanLine + "</p>"
 				formatOutput.value += newLine + "\n"
 			}
+		}
+		else if (checkChecks(cleanLine) && cleanLine === cleanLine.toUpperCase()) {
+			newLine = `<p align='center'><span class='${checkChecks(cleanLine)}'>` + cleanLine + "</span></p>"
+			formatOutput.value += newLine + "\n"
+		}
+		else if (checkKeywords(cleanLine) || (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10)) {
+			lastestSkill = ""
+			if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
+				thought = true
+			}
+			if (checkKeywords(cleanLine).toUpperCase() === "ITEM GAINED:") {
+				item = true
+			}
+			newLine = "<p class='task'>" + cleanLine + "</p>"
+			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.replace(/[^a-zA-Z]/g, '').length > 1) {
 			console.log(firstWord)
