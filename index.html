@@ -330,66 +330,44 @@
 						</div>
 						<form id="customSkills">
 							<h1 class="text-light text-center">Custom Skills</h1>
-							<div class="mb-3 d-flex flex-column">
-								<label for="INT" class="form-label text-light">INTELLECT</label>
-								<div class="d-flex">
-									<input required name="INTcolor" type="color" class="form-control form-control-color"
-										id="INTcolor">
-									<input required name="INT" type="text" class="form-control" id="INT"
-										aria-describedby="INThelp">
-								</div>
-								<div id="INThelp" class="form-text">
-									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
-								</div>
-							</div>
-							<div class="mb-3 d-flex flex-column">
-								<label for="PSY" class="form-label text-light">PSYCHE</label>
-								<div class="d-flex">
-									<input required name="PSYcolor" type="color" class="form-control form-control-color"
-										id="PSYcolor">
-									<input required name="PSY" type="text" class="form-control" id="PSY"
-										aria-describedby="PSYhelp">
-								</div>
-								<div id="PSYhelp" class="form-text">
-									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
-								</div>
-							</div>
-							<div class="mb-3 d-flex flex-column">
-								<label for="FYS" class="form-label text-light">PHYSIQUE</label>
-								<div class="d-flex">
-									<input required name="FYScolor" type="color" class="form-control form-control-color"
-										id="FYScolor">
-									<input required name="FYS" type="text" class="form-control" id="FYS"
-										aria-describedby="FYShelp">
-								</div>
-								<div id="FYShelp" class="form-text">
-									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL"
-								</div>
-							</div>
-							<div class="mb-3 d-flex flex-column">
-								<label for="MOT" class="form-label text-light">MOTORICS</label>
-								<div class="d-flex">
-									<input required name="MOTcolor" type="color" class="form-control form-control-color"
-										id="MOTcolor">
-									<input required name="MOT" type="text" class="form-control" id="MOT"
-										aria-describedby="MOThelp">
-								</div>
-								<div id="MOThelp" class="form-text">
-									Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL". Skills
-									like PERCEPTION will need all of their variants to be added as well
-								</div>
-							</div>
-							<div class="mb-3 d-flex flex-column">
-								<label for="YOU" class="form-label text-light">YOU</label>
-								<div class="d-flex w-25">
-									<input required name="YOUcolor" type="color" class="form-control form-control-color"
-										id="YOUcolor">
-									<input required name="YOU" type="text" class="form-control" id="YOU">
-								</div>
-							</div>
+							<div id="atts"></div>
 							<button type="submit" class="btn btn-success">Save</button>
+							<button type="button" id="addAttribute" data-bs-toggle="modal" data-bs-target="#modalAdd" class="btn btn-primary">Add new Attribute</button>
 							<button type="button" id="resetSkills" class="btn btn-secondary">Reset to default</button>
 						</form>
+						<div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false"
+							tabindex="-1" aria-labelledby="title" aria-hidden="true">
+							<form id="customAttribute" class="modal-dialog modal-lg modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 id="title" class="modal-title fs-5">Add New Attribute</h1>
+									</div>
+									<div class="modal-body">
+										<div class="mb-3 d-flex flex-column">
+											<label for="att" class="form-label text-light">Attribute</label>
+											<div class="d-flex">
+												<input required name="color" type="color"
+													class="form-control form-control-color" id="color">
+												<input required placeholder="Enter name here..." name="att" type="text"
+													class="form-control" id="att" aria-describedby="attHelp">
+												<input required
+													placeholder="Enter short name (ex. INT/PSY/FYS/MOT) here..."
+													name="attShort" type="text" class="form-control" id="attShort"
+													aria-describedby="attHelp">
+											</div>
+											<div id="attHelp" class="form-text">
+												Place into the first box the name of your attribute (ex. INTELLECT) and
+												in the second box enter the shortened name of the attribute (ex. INT).
+												Both of these are mandatory and required.
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" data-bs-dismiss="modal" class="btn btn-success">Save</button>
+									</div>
+								</div>
+							</form>
+						</div>
 						<form id="customChecks">
 							<h1 class="text-light text-center">Custom Checks</h1>
 							<div class="mb-3 d-flex flex-column">

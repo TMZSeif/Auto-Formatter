@@ -16,14 +16,24 @@ const formatStylesheet = document.styleSheets[2]
 const resetSkillsButton = document.getElementById("resetSkills")
 const customChecks = document.getElementById("customChecks")
 const resetChecks = document.getElementById("resetChecks")
+const customAtt = document.getElementById("customAttribute")
 
 // All the stuff that can be changed and need to be kept track of
-let INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
-let PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
-let PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-	"HALF LIGHT", "PHYSIQUE", "FYS"]
-let MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
-	"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+let ATTRIBUTES = {
+	"INTELLECT": ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"],
+	"PSYCHE": ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"],
+	"PHYSIQUE": ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+		"HALF LIGHT", "PHYSIQUE", "FYS"],
+	"MOTORICS": ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
+		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+}
+let ATTRIBUTECOLORS = {
+	"int": "#5cc1d7",
+	"psy": "#7556cf",
+	"fys": "#cb476a",
+	"mot": "#e3b734",
+	"you": "#c3d2db"
+}
 let YOU = "YOU"
 let CHECKS = {
 	"CHECK SUCCESS": "success", "CRITICAL SUCCESS": "success", "CHECK FAILURE": "fail", "CRITICAL FAILURE": "fail",
@@ -37,20 +47,19 @@ let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", 
 	"BREAKTHROUGH IMMINENT:"]
 
 // ugly looking conditional for updating custom stuff based on cached data
-if (localStorage.getItem("INT")) {
-	INTELLECT = localStorage.getItem("INT").toUpperCase().split(",")
-	PSYCHE = localStorage.getItem("PSY").toUpperCase().split(",")
-	PHYSIQUE = localStorage.getItem("FYS").toUpperCase().split(",")
-	MOTORICS = localStorage.getItem("MOT").toUpperCase().split(",")
+if (localStorage.getItem("ATTRIBUTES")) {
+	ATTRIBUTES = JSON.parse(localStorage.getItem("ATTRIBUTES"))
 	YOU = localStorage.getItem("YOU").toUpperCase()
 }
 // look at all these mAgIc nUmBeRs ooooo spoooky
-if (localStorage.getItem("INTcolor")) {
-	formatStylesheet.cssRules[27].style.color = localStorage.getItem("YOUcolor")
-	formatStylesheet.cssRules[28].style.color = localStorage.getItem("INTcolor")
-	formatStylesheet.cssRules[29].style.color = localStorage.getItem("PSYcolor")
-	formatStylesheet.cssRules[30].style.color = localStorage.getItem("FYScolor")
-	formatStylesheet.cssRules[31].style.color = localStorage.getItem("MOTcolor")
+if (localStorage.getItem("ATTRIBUTECOLORS")) {
+	ATTRIBUTECOLORS = JSON.parse(localStorage.getItem("ATTRIBUTECOLORS"))
+	for (const [att, color] of Object.entries(ATTRIBUTECOLORS)) {
+		formatStylesheet.insertRule(`#workskin .${att} {
+			color: ${color};
+			font-weight: bold
+			}`, formatStylesheet.cssRules.length)
+	}
 }
 
 if (localStorage.getItem("checks")) {
@@ -101,33 +110,16 @@ const checkSkillNames = (skill) => {
 	const skills = skill.split(" AND ")
 	let types = []
 	console.log(skill.split("[")[0].trim())
-	if (INTELLECT.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-		return ["int"]
-	}
-	if (PSYCHE.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-		return ["psy"]
-	}
-	if (PHYSIQUE.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-		return ["fys"]
-	}
-	if (MOTORICS.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-		return ["mot"]
+	for (const att of Object.values(ATTRIBUTES)) {
+		if (att.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
+			return [att.at(-1).toLowerCase()]
+		}
 	}
 	for (const item of skills) {
-		if (INTELLECT.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-			types.push("int")
-		}
-		else if (PSYCHE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-			types.push("psy")
-		}
-		else if (PHYSIQUE.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-			types.push("fys")
-		}
-		else if (MOTORICS.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
-			types.push("mot")
-		}
-		else {
-			types.push("neutral")
+		for (const att of Object.values(ATTRIBUTES)) {
+			if (att.includes(item.replace(/\s*\[.*?\]\s*/g, "").trim())) {
+				types.push(att.at(-1).toLowerCase())
+			}
 		}
 	}
 	if (skill === YOU) {
@@ -186,90 +178,30 @@ const checkKeywords = (line) => {
 
 const replaceSkillBonuses = (newLine) => {
 	let done = false
-	INTELLECT.forEach((skill) => {
-		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
-			if (skill === "INT" || skill === "INTELLECT") {
-				if (/\bINT\b/gi.test(newLine) || /\bINTELLECT\b/gi.test(newLine)) {
-					let words = newLine.slice(0, -4).split(" ")
-					let i = 0
-					for (const word of words) {
-						if (word.toUpperCase() === "INT" || word.toUpperCase() === "INTELLECT") {
-							done = true
-							words[i] = `<span class='int'>${word}</span>`
+	for (const att of Object.values(ATTRIBUTES)) {
+		att.forEach((skill) => {
+			if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+				if (skill === att.at(-1) || skill === att.at(-2)) {
+					if (new RegExp(`\\b${att.at(-1)}\\b`, "gi").test(newLine) || new RegExp(`\\b${att.at(-2)}\\b`, "gi").test(newLine)) {
+						let words = newLine.slice(0, -4).split(" ")
+						let i = 0
+						for (const word of words) {
+							if (word.toUpperCase() === att.at(-1) || word.toUpperCase() === att.at(-2)) {
+								done = true
+								words[i] = `<span class='${att.at(-1).toLowerCase()}'>${word}</span>`
+							}
+							i++
 						}
-						i++
+						newLine = words.join(" ") + "<br>"
 					}
-					newLine = words.join(" ") + "<br>"
+					return
 				}
-				return
+				done = true
+				newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + `<span class='${att.at(-1).toLowerCase()}'>` + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
 			}
-			done = true
-			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='int'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
-		}
-	})
-	PSYCHE.forEach((skill) => {
-		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
-			if (skill === "PSY" || skill === "PSYCHE") {
-				if (/\bPSY\b/gi.test(newLine) || /\bPSYCHE\b/gi.test(newLine)) {
-					let words = newLine.slice(0, -4).split(" ")
-					let i = 0
-					for (const word of words) {
-						if (word.toUpperCase() === "PSY" || word.toUpperCase() === "PSYCHE") {
-							done = true
-							words[i] = `<span class='psy'>${word}</span>`
-						}
-						i++
-					}
-					newLine = words.join(" ") + "<br>"
-				}
-				return
-			}
-			done = true
-			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='psy'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
-		}
-	})
-	PHYSIQUE.forEach((skill) => {
-		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
-			if (skill === "FYS" || skill === "PHYSIQUE") {
-				if (/\bFYS\b/gi.test(newLine) || /\bPHYSIQUE\b/gi.test(newLine)) {
-					let words = newLine.slice(0, -4).split(" ")
-					let i = 0
-					for (const word of words) {
-						if (word.toUpperCase() === "FYS" || word.toUpperCase() === "PHYSIQUE") {
-							done = true
-							words[i] = `<span class='fys'>${word}</span>`
-						}
-						i++
-					}
-					newLine = words.join(" ") + "<br>"
-				}
-				return
-			}
-			done = true
-			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='fys'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
-		}
-	})
-	MOTORICS.forEach((skill) => {
-		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
-			if (skill === "MOT" || skill === "MOTORICS") {
-				if (/\bMOT\b/gi.test(newLine) || /\bMOTORICS\b/gi.test(newLine)) {
-					let words = newLine.slice(0, -4).split(" ")
-					let i = 0
-					for (const word of words) {
-						if (word.toUpperCase() === "MOT" || word.toUpperCase() === "MOTORICS") {
-							done = true
-							words[i] = `<span class='mot'>${word}</span>`
-						}
-						i++
-					}
-					newLine = words.join(" ") + "<br>"
-				}
-				return
-			}
-			done = true
-			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='mot'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
-		}
-	})
+		})
+	}
+
 	return newLine
 }
 
@@ -420,36 +352,92 @@ previewButton.addEventListener("click", () => {
 	preview.innerHTML = formatOutput.value
 })
 
+const deleteAttribute = (event) => {
+	delete ATTRIBUTECOLORS[ATTRIBUTES[event.target.id.slice(0, -3)].at(-1).toLowerCase()]
+	delete ATTRIBUTES[event.target.id.slice(0, -3)]
+	localStorage.setItem("ATTRIBUTES", JSON.stringify(ATTRIBUTES))
+	localStorage.setItem("ATTRIBUTECOLORS", JSON.stringify(ATTRIBUTECOLORS))
+	customButton.dispatchEvent(new Event("click", { bubbles: true }))
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
+	const alertPlaceholder = document.getElementById("alertPlaceholder")
+	alertPlaceholder.classList.remove('visually-hidden');
+	setTimeout(function () {
+		alertPlaceholder.classList.add('show');
+	}, 100);
+}
+
 customButton.addEventListener("click", () => {
-	const INT = document.getElementById("INT")
-	const PSY = document.getElementById("PSY")
-	const FYS = document.getElementById("FYS")
-	const MOT = document.getElementById("MOT")
-	const you = document.getElementById("YOU")
-	const INTcolor = document.getElementById("INTcolor")
-	const PSYcolor = document.getElementById("PSYcolor")
-	const FYScolor = document.getElementById("FYScolor")
-	const MOTcolor = document.getElementById("MOTcolor")
-	const YOUcolor = document.getElementById("YOUcolor")
-	if (localStorage.getItem("INTcolor")) {
-		INTcolor.value = localStorage.getItem("INTcolor")
-		PSYcolor.value = localStorage.getItem("PSYcolor")
-		FYScolor.value = localStorage.getItem("FYScolor")
-		MOTcolor.value = localStorage.getItem("MOTcolor")
-		YOUcolor.value = localStorage.getItem("YOUcolor")
+	const Skills = document.getElementById("atts")
+	Skills.innerHTML = ""
+	for (const [name, att] of Object.entries(ATTRIBUTES)) {
+		const div = document.createElement("div")
+		const label = document.createElement("label")
+		const divInput = document.createElement("div")
+		const colorPicker = document.createElement("input")
+		const skill = document.createElement("input")
+		const helpText = document.createElement("div")
+		const del = document.createElement("button")
+		del.type = "button"
+		del.className = "btn btn-danger"
+		del.innerText = "Delete"
+		del.id = name+"del"
+		del.onclick = deleteAttribute
+		div.className = "mb-3 d-flex flex-column"
+		label.setAttribute("for", name)
+		label.className = "form-label text-light"
+		label.innerText = name
+		div.appendChild(label)
+		divInput.className = "d-flex"
+		colorPicker.setAttribute("required", "true")
+		colorPicker.setAttribute("name", name + "color")
+		colorPicker.setAttribute("type", "color")
+		colorPicker.className = "form-control form-control-color"
+		colorPicker.id = name + "color"
+		colorPicker.value = ATTRIBUTECOLORS[ATTRIBUTES[name].at(-1).toLowerCase()]
+		divInput.appendChild(colorPicker)
+		skill.setAttribute("required", "true")
+		skill.setAttribute("name", name)
+		skill.setAttribute("type", "text")
+		skill.setAttribute("aria-describedby", name + "help")
+		skill.className = "form-control"
+		skill.id = name
+		skill.value = [...ATTRIBUTES[name]].slice(0, -2).join(", ")
+		divInput.appendChild(skill)
+		divInput.appendChild(del)
+		div.appendChild(divInput)
+		helpText.id = name + "help"
+		helpText.className = "form-text"
+		helpText.innerText = 'Each Skill name must be separated by commas like so "SKILL, SKILL, SKILL". Skills like PERCEPTION will need all of their variants to be added as well'
+		div.appendChild(helpText)
+		Skills.appendChild(div)
 	}
-	else {
-		INTcolor.value = "#5cc1d7"
-		PSYcolor.value = "#7556cf"
-		FYScolor.value = "#cb476a"
-		MOTcolor.value = "#e3b734"
-		YOUcolor.value = "#c3d2db"
-	}
-	INT.value = [...INTELLECT].slice(0, -2).join(", ")
-	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
-	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
-	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
-	you.value = YOU
+	const div = document.createElement("div")
+	const label = document.createElement("label")
+	const divInput = document.createElement("div")
+	const colorPicker = document.createElement("input")
+	const skill = document.createElement("input")
+	div.className = "mb-3 d-flex flex-column"
+	label.setAttribute("for", "YOU")
+	label.className = "form-label text-light"
+	label.innerText = "YOU"
+	div.appendChild(label)
+	divInput.className = "d-flex"
+	colorPicker.setAttribute("required", "true")
+	colorPicker.setAttribute("name", "YOUcolor")
+	colorPicker.setAttribute("type", "color")
+	colorPicker.className = "form-control form-control-color"
+	colorPicker.id = "YOUcolor"
+	colorPicker.value = ATTRIBUTECOLORS["you"]
+	divInput.appendChild(colorPicker)
+	skill.setAttribute("required", "true")
+	skill.setAttribute("name", "YOU")
+	skill.setAttribute("type", "text")
+	skill.className = "form-control"
+	skill.id = "YOU"
+	skill.value = YOU
+	divInput.appendChild(skill)
+	div.appendChild(divInput)
+	Skills.appendChild(div)
 })
 
 customSkills.addEventListener("submit", (event) => {
@@ -457,50 +445,29 @@ customSkills.addEventListener("submit", (event) => {
 	// Yandere simulator ahh switch case
 	const formData = new FormData(customSkills)
 	for (const attribute of formData) {
-		switch (attribute[0]) {
-			case "INT":
-				INTELLECT = attribute[1].split(",")
-				INTELLECT.forEach((value, idx, arr) => { arr[idx] = value.trim() })
-				INTELLECT.push("INTELLECT", "INT")
-				break
-			case "PSY":
-				PSYCHE = attribute[1].split(",")
-				PSYCHE.forEach((value, idx, arr) => { arr[idx] = value.trim() })
-				PSYCHE.push("PSYCHE", "PSY")
-				break
-			case "FYS":
-				PHYSIQUE = attribute[1].split(",")
-				PHYSIQUE.forEach((value, idx, arr) => { arr[idx] = value.trim() })
-				PHYSIQUE.push("PHYSIQUE", "FYS")
-				break
-			case "MOT":
-				MOTORICS = attribute[1].split(",")
-				MOTORICS.forEach((value, idx, arr) => { arr[idx] = value.trim() })
-				MOTORICS.push("MOTORICS", "MOT")
-				break
-			case "YOU":
+		for (const [name, att] of Object.entries(ATTRIBUTES)) {
+			if (attribute[0] === name) {
+				ATTRIBUTES[name] = attribute[1].split(",")
+				ATTRIBUTES[name].forEach((value, idx, arr) => { arr[idx] = value.trim() })
+				ATTRIBUTES[name].push(att.at(-2), att.at(-1))
+			}
+			else if (attribute[0] === "YOU") {
 				YOU = attribute[1].trim()
-				break
-			case "YOUcolor":
-				localStorage.setItem("YOUcolor", attribute[1])
-				formatStylesheet.cssRules[27].style.color = attribute[1]
-				break
-			case "INTcolor":
-				localStorage.setItem("INTcolor", attribute[1])
-				formatStylesheet.cssRules[28].style.color = attribute[1]
-				break
-			case "PSYcolor":
-				localStorage.setItem("PSYcolor", attribute[1])
-				formatStylesheet.cssRules[29].style.color = attribute[1]
-				break
-			case "FYScolor":
-				localStorage.setItem("FYScolor", attribute[1])
-				formatStylesheet.cssRules[30].style.color = attribute[1]
-				break
-			case "MOTcolor":
-				localStorage.setItem("MOTcolor", attribute[1])
-				formatStylesheet.cssRules[31].style.color = attribute[1]
-				break
+			}
+			else if (attribute[0] === name + "color") {
+				ATTRIBUTECOLORS[att.at(-1).toLowerCase()] = attribute[1]
+				formatStylesheet.insertRule(`#workskin .${att.at(-1).toLowerCase()} {
+					color: ${attribute[1]};
+					font-weight: bold
+				}`, formatStylesheet.cssRules.length)
+			}
+			else if (attribute[0] === "YOUcolor") {
+				ATTRIBUTECOLORS["you"] = attribute[1]
+				formatStylesheet.insertRule(`#workskin .you {
+					color: ${attribute[1]};
+					font-weight: bold
+				}`, formatStylesheet.cssRules.length)
+			}
 		}
 	}
 
@@ -510,10 +477,8 @@ customSkills.addEventListener("submit", (event) => {
 	setTimeout(function () {
 		alertPlaceholder.classList.add('show');
 	}, 100);
-	localStorage.setItem("INT", INTELLECT)
-	localStorage.setItem("PSY", PSYCHE)
-	localStorage.setItem("FYS", PHYSIQUE)
-	localStorage.setItem("MOT", MOTORICS)
+	localStorage.setItem("ATTRIBUTES", JSON.stringify(ATTRIBUTES))
+	localStorage.setItem("ATTRIBUTECOLORS", JSON.stringify(ATTRIBUTECOLORS))
 	localStorage.setItem("YOU", YOU)
 })
 
@@ -529,48 +494,32 @@ closeAlert.addEventListener("click", () => {
 
 // Big ol' red button that deletes everything. Press on occasion if one is bored
 resetSkillsButton.addEventListener("click", () => {
-	localStorage.removeItem("INT")
-	localStorage.removeItem("PSY")
-	localStorage.removeItem("FYS")
-	localStorage.removeItem("MOT")
+	localStorage.removeItem("ATTRIBUTES")
+	localStorage.removeItem("ATTRIBUTECOLORS")
 	localStorage.removeItem("YOU")
-	localStorage.removeItem("YOUcolor")
-	localStorage.removeItem("INTcolor")
-	localStorage.removeItem("PSYcolor")
-	localStorage.removeItem("FYScolor")
-	localStorage.removeItem("MOTcolor")
-	INTELLECT = ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"]
-	PSYCHE = ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"]
-	PHYSIQUE = ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
-		"HALF LIGHT", "PHYSIQUE", "FYS"]
-	MOTORICS = ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
-		"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	ATTRIBUTES = {
+		"INTELLECT": ["LOGIC", "ENCYCLOPEDIA", "RHETORIC", "VISUAL CALCULUS", "CONCEPTUALIZATION", "DRAMA", "INTELLECT", "INT"],
+		"PSYCHE": ["VOLITION", "EMPATHY", "AUTHORITY", "ESPRIT DE CORPS", "SUGGESTION", "INLAND EMPIRE", "PSYCHE", "PSY"],
+		"PHYSIQUE": ["PHYSICAL INSTRUMENT", "ENDURANCE", "ELECTROCHEMISTRY", "SHIVERS", "PAIN THRESHOLD",
+			"HALF LIGHT", "PHYSIQUE", "FYS"],
+		"MOTORICS": ["REACTION SPEED", "HAND/EYE COORDINATION", "PERCEPTION", "PERCEPTION (SIGHT)", "PERCEPTION (SMELL)", "PERCEPTION (HEARING)", "PERCEPTION (TOUCH)", "PERCEPTION (TASTE)", "SAVOIR FAIRE",
+			"COMPOSURE", "INTERFACING", "MOTORICS", "MOT"]
+	}
+	ATTRIBUTECOLORS = {
+		"int": "#5cc1d7",
+		"psy": "#7556cf",
+		"fys": "#cb476a",
+		"mot": "#e3b734",
+		"you": "#c3d2db"
+	}
 	YOU = "YOU"
-	const INT = document.getElementById("INT")
-	const PSY = document.getElementById("PSY")
-	const FYS = document.getElementById("FYS")
-	const MOT = document.getElementById("MOT")
-	const you = document.getElementById("YOU")
-	const INTcolor = document.getElementById("INTcolor")
-	const PSYcolor = document.getElementById("PSYcolor")
-	const FYScolor = document.getElementById("FYScolor")
-	const MOTcolor = document.getElementById("MOTcolor")
-	const YOUcolor = document.getElementById("YOUcolor")
-	you.value = YOU
-	INT.value = [...INTELLECT].slice(0, -2).join(", ")
-	PSY.value = [...PSYCHE].slice(0, -2).join(", ")
-	FYS.value = [...PHYSIQUE].slice(0, -2).join(", ")
-	MOT.value = [...MOTORICS].slice(0, -2).join(", ")
-	YOUcolor.value = "#c3d2db"
-	INTcolor.value = "#5cc1d7"
-	PSYcolor.value = "#7556cf"
-	FYScolor.value = "#cb476a"
-	MOTcolor.value = "#e3b734"
-	formatStylesheet.cssRules[27].style.color = "#c3d2db"
-	formatStylesheet.cssRules[28].style.color = "#5cc1d7"
-	formatStylesheet.cssRules[29].style.color = "#7556cf"
-	formatStylesheet.cssRules[30].style.color = "#cb476a"
-	formatStylesheet.cssRules[31].style.color = "#e3b734"
+	customButton.dispatchEvent(new Event("click", { bubbles: true }))
+	for (const [att, color] of Object.entries(ATTRIBUTECOLORS)) {
+		formatStylesheet.insertRule(`#workskin .${att} {
+			color: ${color};
+			font-weight: bold
+			}`, formatStylesheet.cssRules.length)
+	}
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })
 
@@ -582,7 +531,7 @@ customChecks.addEventListener("submit", (event) => {
 
 	const formData = new FormData(customChecks)
 	let data = []
-	for (attribute of formData) {
+	for (const attribute of formData) {
 		data.push(attribute)
 	}
 	CHECKS[data[0][1].toUpperCase().trim()] = data[0][1].replace(" ", "").replace(/[^a-zA-Z]/g, '').toLowerCase().trim()
@@ -626,4 +575,25 @@ resetChecks.addEventListener("click", () => {
 		"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
 	}
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
+})
+
+customAtt.addEventListener("submit", (event) => {
+	event.preventDefault()
+
+	const formData = new FormData(customAtt)
+	let data = []
+	for (const attribute of formData) {
+		data.push(attribute)
+	}
+
+	ATTRIBUTECOLORS[data[2][1].toLowerCase()] = data[0][1]
+	ATTRIBUTES[data[1][1].toUpperCase()] = [data[1][1].toUpperCase(), data[2][1].toUpperCase()]
+	localStorage.setItem("ATTRIBUTES", JSON.stringify(ATTRIBUTES))
+	localStorage.setItem("ATTRIBUTECOLORS", JSON.stringify(ATTRIBUTECOLORS))
+	customButton.dispatchEvent(new Event("click", { bubbles: true }))
+	const alertPlaceholder = document.getElementById("alertPlaceholder")
+	alertPlaceholder.classList.remove('visually-hidden');
+	setTimeout(function () {
+		alertPlaceholder.classList.add('show');
+	}, 100);
 })
