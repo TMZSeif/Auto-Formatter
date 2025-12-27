@@ -188,24 +188,84 @@ const replaceSkillBonuses = (newLine) => {
 	let done = false
 	INTELLECT.forEach((skill) => {
 		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			if (skill === "INT" || skill === "INTELLECT") {
+				if (/\bINT\b/gi.test(newLine) || /\bINTELLECT\b/gi.test(newLine)) {
+					let words = newLine.slice(0, -4).split(" ")
+					let i = 0
+					for (const word of words) {
+						if (word.toUpperCase() === "INT" || word.toUpperCase() === "INTELLECT") {
+							done = true
+							words[i] = `<span class='int'>${word}</span>`
+						}
+						i++
+					}
+					newLine = words.join(" ") + "<br>"
+				}
+				return
+			}
 			done = true
 			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='int'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
 		}
 	})
 	PSYCHE.forEach((skill) => {
 		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			if (skill === "PSY" || skill === "PSYCHE") {
+				if (/\bPSY\b/gi.test(newLine) || /\bPSYCHE\b/gi.test(newLine)) {
+					let words = newLine.slice(0, -4).split(" ")
+					let i = 0
+					for (const word of words) {
+						if (word.toUpperCase() === "PSY" || word.toUpperCase() === "PSYCHE") {
+							done = true
+							words[i] = `<span class='psy'>${word}</span>`
+						}
+						i++
+					}
+					newLine = words.join(" ") + "<br>"
+				}
+				return
+			}
 			done = true
 			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='psy'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
 		}
 	})
 	PHYSIQUE.forEach((skill) => {
 		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			if (skill === "FYS" || skill === "PHYSIQUE") {
+				if (/\bFYS\b/gi.test(newLine) || /\bPHYSIQUE\b/gi.test(newLine)) {
+					let words = newLine.slice(0, -4).split(" ")
+					let i = 0
+					for (const word of words) {
+						if (word.toUpperCase() === "FYS" || word.toUpperCase() === "PHYSIQUE") {
+							done = true
+							words[i] = `<span class='fys'>${word}</span>`
+						}
+						i++
+					}
+					newLine = words.join(" ") + "<br>"
+				}
+				return
+			}
 			done = true
 			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='fys'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
 		}
 	})
 	MOTORICS.forEach((skill) => {
 		if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
+			if (skill === "MOT" || skill === "MOTORICS") {
+				if (/\bMOT\b/gi.test(newLine) || /\bMOTORICS\b/gi.test(newLine)) {
+					let words = newLine.slice(0, -4).split(" ")
+					let i = 0
+					for (const word of words) {
+						if (word.toUpperCase() === "MOT" || word.toUpperCase() === "MOTORICS") {
+							done = true
+							words[i] = `<span class='mot'>${word}</span>`
+						}
+						i++
+					}
+					newLine = words.join(" ") + "<br>"
+				}
+				return
+			}
 			done = true
 			newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + "<span class='mot'>" + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
 		}
@@ -338,7 +398,7 @@ formatInput.addEventListener("input", event => {
 						check = word.split("[")[1].split("]")[0]
 						check = `<span class='check'>[${check}]</span>`
 					}
-					skill += `<span class='${checkSkillNames(word)[0]}'>` + word.split("[")[0] + "</span>" + check +"<span class='neutral'> AND </span>"
+					skill += `<span class='${checkSkillNames(word)[0]}'>` + word.split("[")[0] + "</span>" + check + "<span class='neutral'> AND </span>"
 				}
 				newLine = newLine.split(" - ").slice(1).join(" - ")
 				formatOutput.value += skill.slice(0, -34) + " - " + newLine + "\n"
@@ -515,7 +575,8 @@ resetSkillsButton.addEventListener("click", () => {
 })
 
 // The way this is done makes me wanna hurl but I suppose
-// that's what I get for daring to f#ck with the CSSOM
+// that's what I get for daring to f#ck with the CSSOM. Also f#ck you Chrome.
+// you know what you did.
 customChecks.addEventListener("submit", (event) => {
 	event.preventDefault()
 
