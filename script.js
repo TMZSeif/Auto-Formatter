@@ -55,10 +55,17 @@ if (localStorage.getItem("ATTRIBUTES")) {
 if (localStorage.getItem("ATTRIBUTECOLORS")) {
 	ATTRIBUTECOLORS = JSON.parse(localStorage.getItem("ATTRIBUTECOLORS"))
 	for (const [att, color] of Object.entries(ATTRIBUTECOLORS)) {
-		formatStylesheet.insertRule(`#workskin .${att} {
+		if (att !== "you") {
+			formatStylesheet.insertRule(`#workskin .${att} {
 			color: ${color};
 			font-weight: bold
 			}`, formatStylesheet.cssRules.length)
+		}
+		else {
+			formatStylesheet.insertRule(`#workskin .${att} {
+			color: ${color};
+			}`, formatStylesheet.cssRules.length)
+		}
 	}
 }
 
@@ -182,13 +189,13 @@ const replaceSkillBonuses = (newLine) => {
 		att.forEach((skill) => {
 			if (newLine.toUpperCase().indexOf(skill) !== -1 && done === false) {
 				if (skill === att.at(-1) || skill === att.at(-2)) {
-					if (new RegExp(`\\b${att.at(-1)}\\b`, "gi").test(newLine) || new RegExp(`\\b${att.at(-2)}\\b`, "gi").test(newLine)) {
+					if (new RegExp(`\\b${att.at(-1)}\\b`, "gi").test(newLine.replace(/[^a-zA-Z ]/g, "")) || new RegExp(`\\b${att.at(-2)}\\b`, "gi").test(newLine.replace(/[^a-zA-Z ]/g, ""))) {
 						let words = newLine.slice(0, -4).split(" ")
 						let i = 0
 						for (const word of words) {
-							if (word.toUpperCase() === att.at(-1) || word.toUpperCase() === att.at(-2)) {
+							if (word.replace(/[^a-zA-Z ]/g, "").toUpperCase() === att.at(-1) || word.replace(/[^a-zA-Z ]/g, "").toUpperCase() === att.at(-2)) {
 								done = true
-								words[i] = `<span class='${att.at(-1).toLowerCase()}'>${word}</span>`
+								words[i] = `<span class='${att.at(-1).toLowerCase()}'>${word.replace(/[^a-zA-Z ]/g, "")}</span>${word.replace(/[a-zA-Z ]/g, "")}`
 							}
 							i++
 						}
@@ -465,7 +472,6 @@ customSkills.addEventListener("submit", (event) => {
 				ATTRIBUTECOLORS["you"] = attribute[1]
 				formatStylesheet.insertRule(`#workskin .you {
 					color: ${attribute[1]};
-					font-weight: bold
 				}`, formatStylesheet.cssRules.length)
 			}
 		}
