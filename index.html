@@ -43,10 +43,6 @@
 					type="button" role="tab" aria-controls="custom-tab-pane" aria-selected="false">Custom
 					Formatting</button>
 			</li>
-			<li class="nav-item">
-				<button class="nav-link" id="bg-tab" data-bs-toggle="tab" data-bs-target="#bg-tab-pane" type="button"
-					role="tab" aria-controls="bg-tab-pane" aria-selected="false">Custom Background</button>
-			</li>
 		</ul>
 		<div class="d-flex flex-cloumn tab-content w-100 flex-grow-1" id="nav-tabContent">
 			<div class="tab-pane fade show active flex-grow-1 w-100" id="format-tab-pane" role="tabpanel"
@@ -76,11 +72,8 @@
 						<div id="chapters">
 							<div class="chapter">
 								<div class="userstuff module" role="article">
-									<div class="feld-overlay-start"></div>
-									<div id="previewInsert" class="feld-body">
+									<div id="previewInsert">
 
-									</div>
-									<div class="feld-overlay-end">
 									</div>
 								</div>
 							</div>
@@ -115,6 +108,55 @@
 						bolded** and if you want to place stars without making something italic or bold preface the
 						star
 						with a backslash \*like so\*</p>
+					<h1 class="text text-light text-center">Background</h1>
+					<p class="text text-light text-center">There are three different types of backgrounds supported.
+						FELD, OBLIVION (all black) and BLANK (all white). Transitions between all three backgrounds are
+						only possible if your starting background is FELD. And your starting background can be either
+						FELD or OBLIVION but not BLANK.</p>
+					<p class="text text-light text-center">So that means if you start with OBLIVION then you can only
+						use OBLIVION for the rest of the content. If you start with FELD you can transition between all
+						three of them no problem.</p>
+					<p class="text text-light text-center">To use the OBLIVION background you must wrap the content
+						between OBLIVION START and OBLIVION END like so.</p>
+					<pre><code style="color: #e685b5;">
+						OBLIVION START
+						Content goes here...
+						OBLIVION END
+					</code></pre>
+					<p class="text text-light text-center">To use the FELD background you must wrap the content between
+						FELD OVERLAY START and FELD OVERLAY END like so</p>
+					<pre><code style="color: #e685b5;">
+						FELD OVERLAY START
+						Content goes here...
+						FELD OVERLAY END
+					</code></pre>
+					<p class="text text-light text-center">To transition between two different backgrounds simply wrap
+						the content in "INITIAL BACKGROUND" "TARGET BACKGROUND" START and "INITIAL BACKGROUND" "TARGET
+						BACKGROUND" END like so</p>
+					<pre><code style="color: #e685b5;">
+						FELD OVERLAY START
+						Transitions only work if you're starting from FELD
+						FELD OBLIVION START
+						Transitioning into Oblivion
+						FELD OBLIVION END
+						OBLIVION START
+						We are in Oblivion
+						OBLIVION END
+						OBLIVION BLANK START
+						Transitioning into blank
+						OBLIVION BLANK END
+						BLANK START
+						We are in Blank
+						BLANK END
+						BLANK FELD START
+						Transitioning into Feld
+						BLANK FELD END
+						We are in Feld
+						FELD OVERLAY END
+					</code></pre>
+					<p class="text text-light text-center">Full transitions between all 3 backgrounds are supported. If
+						you wish for a sharp change in background with no transition. Simply omit the transition
+						keywords.</p>
 					<h1 class="text text-light text-center">Skill Dialogue</h1>
 					<p class="text text-light text-center">When creating Skill dialogue, all Skill names must be fully
 						capitalized.</p>
@@ -332,7 +374,8 @@
 							<h1 class="text-light text-center">Custom Skills</h1>
 							<div id="atts"></div>
 							<button type="submit" class="btn btn-success">Save</button>
-							<button type="button" id="addAttribute" data-bs-toggle="modal" data-bs-target="#modalAdd" class="btn btn-primary">Add new Attribute</button>
+							<button type="button" id="addAttribute" data-bs-toggle="modal" data-bs-target="#modalAdd"
+								class="btn btn-primary">Add new Attribute</button>
 							<button type="button" id="resetSkills" class="btn btn-secondary">Reset to default</button>
 						</form>
 						<div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -363,7 +406,8 @@
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="submit" data-bs-dismiss="modal" class="btn btn-success">Save</button>
+										<button type="submit" data-bs-dismiss="modal"
+											class="btn btn-success">Save</button>
 									</div>
 								</div>
 							</form>
@@ -395,9 +439,6 @@
 						</form>
 					</div>
 				</div>
-			</div>
-			<div class="tab-pane fade flex-grow-1 w-100" id="bg-tab-pane" role="tabpanel" aria-labelledby="bg-tab-pane"
-				tabindex="0">...
 			</div>
 
 		</div>

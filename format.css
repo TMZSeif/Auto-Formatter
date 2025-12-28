@@ -3,6 +3,7 @@
   overflow: hidden;
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, sans-serif, "GNU Unifont" !important;
   max-width: 72em;
+  min-width: 49em;
 }
 
 #workskin div.userstuff p:first-child,
@@ -38,7 +39,7 @@
 }
 
 #workskin .feld-body {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em),  linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
   background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 100% 100%, 0 50%, 100% 50%, 100% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
   background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
@@ -52,7 +53,7 @@
 }
 
 #workskin .feld-body-var1 {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
   background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 100%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
   background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
@@ -65,21 +66,20 @@
 }
 
 #workskin .feld-body-var2 {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em),linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
-  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 100% 100%, 0 50%, 0 0%,100% 50%, 100% 100%, 100% 100%, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
-  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 100% 97%, 3.725em 97%,3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), radial-gradient(.35em .35em, #d5d5c7 0, #d5d5c7 .3em, transparent .35em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 100% 100%, 0 50%, 0 0%, 100% 50%, 100% 100%, 100% 100%, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
   width: 99%;
   box-sizing: border-box;
   margin: auto;
   margin-top: -4em;
-  margin-bottom: -6em;
-  padding: 3em 2.6em 4em 2.6em;
+  padding: 3em 2.6em 0 2.6em;
   z-index: 0;
 }
 
 #workskin .feld-body-var3 {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
   background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
   background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 100%, 3.725em 110%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
@@ -95,7 +95,7 @@
 }
 
 #workskin .feld-body-var4 {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
   background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
   background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
@@ -109,7 +109,7 @@
 }
 
 #workskin .feld-body-right {
-  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em),repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
+  background-image: conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), conic-gradient(from 170deg, rgba(112, 112, 92, .5) 0, rgba(112, 112, 92, .5) 5.5%, transparent 5.5%), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.8em, #616364 1.8em, #616364 1.925em, transparent 1.925em), linear-gradient(270deg, transparent 0, transparent 1.325em, #222222 1.325em, #222222 3em, transparent 3em), radial-gradient(.6em .5em, #222222 0, #222222 .35em, transparent .375em), radial-gradient(.6em .5em, #616364 0, #616364 .5em, transparent .525em), repeating-linear-gradient(180deg, #939593 0, #939593 1.25em, transparent 0, transparent 1.9cm), repeating-linear-gradient(180deg, #5d6163 0, #545758 2px, transparent 2px, transparent .5cm), linear-gradient(90deg, transparent 0, #616364 0, #616364 .75em, transparent .75em), linear-gradient(270deg, transparent 0, #616364 .0em, #616364 .75em, transparent .75em), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent 2.5cm), repeating-linear-gradient(180deg, #393734 0, #393734 2px, transparent 0, transparent .5cm), linear-gradient(90deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%), linear-gradient(270deg, transparent 0, transparent .5em, #222 .5em, #222 60%, transparent 60%);
   background-position: 1.6em 5%, 1.6em 45%, 1.6em 95%, 0 50%, 0 90%, 100% 50%, 100% 0, 100% 0, 100% 100%, 0em 20px, 0 0, 0 0, 0em 10px, 0em 10px, 0 100%, 0 100%, 0em 0, 0em 0;
   background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 100% 97%, 100% 100%, 3.725em 110%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
   background-repeat: no-repeat;
@@ -137,7 +137,7 @@
 }
 
 #workskin .broken-transition {
-  background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(180deg, rgba(34, 34, 34, 1) 0%, rgba(0, 0, 0, 1) 100%);
   color: #cfd5bf;
   background-repeat: no-repeat;
   width: 99%;
@@ -152,14 +152,14 @@
   margin: 0em -2.6em 0em -2.6em;
   width: auto;
   height: 30em;
-  background: linear-gradient(180deg, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 #workskin .oblivionfadeout {
   margin: 0em -2.6em 0em -2.6em;
   width: auto;
   height: 30em;
-  background: linear-gradient(0deg, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 #workskin .oblivion {
@@ -171,13 +171,6 @@
   margin: auto;
   padding: 3em 2.6em 4em 2.6em;
   z-index: 5;
-}
-
-#workskin .oblivionq {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 3em 2.6em 4em 2.6em;
-  margin: 0em -2.6em 0em -2.6em;
 }
 
 #workskin .feld-overlay-end {
@@ -442,13 +435,13 @@
 }
 
 #workskin .whitecheck:hover,
-#workskin li.dialogue-check:hover > .whitecheck {
+#workskin li.dialogue-check:hover>.whitecheck {
   background-color: #868070;
   color: #fefbf4;
 }
 
 #workskin .moneycheck:hover,
-#workskin li.dialogue-check:hover > .moneycheck {
+#workskin li.dialogue-check:hover>.moneycheck {
   background-color: #a17f1b;
   color: #fefbf4;
 }
@@ -457,7 +450,7 @@
 #workskin li.dialogue:hover,
 #workskin li.dialogue-fin:hover,
 #workskin li.dialogue-check:hover,
-#workskin li.dialogue-check:hover > .redcheck {
+#workskin li.dialogue-check:hover>.redcheck {
   color: #fefbf4;
 }
 
@@ -568,4 +561,91 @@
   padding-top: 27px;
   padding-bottom: 27px;
   text-indent: 0em;
+}
+
+#workskin .transition-text {
+  width: 94%;
+}
+
+#workskin .transition-end {
+  margin-bottom: 0;
+}
+
+#workskin .blank {
+  background-color: #FFF;
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .feld-oblivion-transition {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0) 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .feld-blank-transition {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255) 70%);
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+
+#workskin .blank-oblivion-transition {
+  background: linear-gradient(#fff, #000 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .blank-feld-transition {
+  background: linear-gradient(rgba(255, 255, 255), rgba(0, 0, 0, 0) 70%);
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivion-feld-transition {
+  background: linear-gradient(rgba(0, 0, 0), rgba(0, 0, 0, 0) 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivion-blank-transition {
+  background: linear-gradient(#000, #fff 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivionvar-1 {
+  background-color: #000000;
+  color: #ffffff;
+  background-repeat: no-repeat;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+  z-index: 5;
 }

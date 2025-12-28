@@ -116,7 +116,6 @@ const createSkillDialogue = (type, line) => {
 const checkSkillNames = (skill) => {
 	const skills = skill.split(" AND ")
 	let types = []
-	console.log(skill.split("[")[0].trim())
 	for (const att of Object.values(ATTRIBUTES)) {
 		if (att.includes(skill.replace(/\s*\[.*?\]\s*/g, "").trim())) {
 			return [att.at(-1).toLowerCase()]
@@ -167,7 +166,6 @@ const handleDialogueTrees = (chosen, line) => {
 const checkChecks = (line) => {
 	for (const [keyword, value] of Object.entries(CHECKS)) {
 		if (line.toUpperCase().includes(keyword.toUpperCase())) {
-			console.log(true)
 			return value
 		}
 	}
@@ -223,12 +221,140 @@ formatInput.addEventListener("input", event => {
 	let thought = false
 	let bonus = false
 	let item = false
+	let feld = false
 	for (const line of textList) {
 		const tempDiv = document.createElement("div")
 		tempDiv.innerHTML = line
 		const cleanLine = tempDiv.textContent
 		const firstWord = cleanLine.split(" ")[0]
-		if (line.trim() === "<ol>") {
+		if (cleanLine.trim() === "FELD OVERLAY START") {
+			formatOutput.value += "<div class='feld-overlay-start'></div><div class='feld-body'>\n"
+			feld = true
+		}
+		else if (cleanLine.trim() === "FELD OVERLAY END") {
+			formatOutput.value += "</div><div class='feld-overlay-end'></div>"
+			feld = false
+		}
+		else if (cleanLine.trim() === "OBLIVION START") {
+			if (!feld) {
+				formatOutput.value += "<div class='oblivion'>\n"
+			}
+			else {
+				let lines = formatOutput.value.split("\n")
+				lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+				formatOutput.value = lines.join("\n")
+				formatOutput.value += "<div class='oblivionvar-1'><div class='transition-text'>\n"
+			}
+		}
+		else if (cleanLine.trim() === "OBLIVION END") {
+			if (feld) {
+				let lines = formatOutput.value.split("\n")
+				lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+				formatOutput.value = lines.join("\n")
+				formatOutput.value += "</div></div>\n"
+			}
+		}
+		else if (cleanLine.trim() === "FELD OBLIVION START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='feld-oblivion-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "FELD OBLIVION END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "OBLIVION FELD START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='oblivion-feld-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "OBLIVION FELD END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "BLANK START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='blank'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "BLANK END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "BLANK FELD START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='blank-feld-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "BLANK FELD END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "FELD BLANK START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='feld-blank-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "FELD BLANK END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "BLANK OBLIVION START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='blank-oblivion-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "BLANK OBLIVION END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "OBLIVION BLANK START") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "<div class='oblivion-blank-transition'><div class='transition-text'>\n"
+		}
+		else if (cleanLine.trim() === "OBLIVION BLANK END") {
+			let lines = formatOutput.value.split("\n")
+			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			formatOutput.value = lines.join("\n")
+			formatOutput.value += "</div></div>\n"
+		}
+		else if (line.trim() === "<ol>") {
 			dialogueTree = true
 			lastestSkill = ""
 			formatOutput.value += line + "\n"
@@ -356,7 +482,13 @@ copyButton.addEventListener("click", async () => {
 })
 
 previewButton.addEventListener("click", () => {
-	preview.innerHTML = formatOutput.value
+	if (formatOutput.value.includes("'feld-overlay-end'")) {
+		preview.innerHTML = formatOutput.value
+	}
+	else {
+		formatOutput.value = formatOutput.value.replace("feld-body", "feld-body-var2")
+		preview.innerHTML = formatOutput.value + "</div>"
+	}
 })
 
 const deleteAttribute = (event) => {
@@ -387,7 +519,7 @@ customButton.addEventListener("click", () => {
 		del.type = "button"
 		del.className = "btn btn-danger"
 		del.innerText = "Delete"
-		del.id = name+"del"
+		del.id = name + "del"
 		del.onclick = deleteAttribute
 		div.className = "mb-3 d-flex flex-column"
 		label.setAttribute("for", name)
