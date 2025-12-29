@@ -590,8 +590,8 @@ previewButton.addEventListener("click", () => {
 		preview.innerHTML = formatOutput.value
 	}
 	else {
-		formatOutput.value = formatOutput.value.replace("feld-body", "feld-body-var2")
-		formatOutput.value = formatOutput.value.replace("terminal", "terminal-var1")
+		formatOutput.value = formatOutput.value.replace("'feld-body'", "'feld-body-var2'")
+		formatOutput.value = formatOutput.value.replace("'terminal'", "'terminal-var1'")
 		preview.innerHTML = formatOutput.value + "</div>"
 	}
 })
