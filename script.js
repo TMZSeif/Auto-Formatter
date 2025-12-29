@@ -12,11 +12,13 @@ const preview = document.getElementById("previewInsert")
 const customButton = document.getElementById("custom-tab")
 const customSkills = document.getElementById("customSkills")
 const closeAlert = document.getElementById("closeAlert")
-const formatStylesheet = document.styleSheets[2]
+let formatStylesheet = document.styleSheets[2]
 const resetSkillsButton = document.getElementById("resetSkills")
 const customChecks = document.getElementById("customChecks")
 const resetChecks = document.getElementById("resetChecks")
 const customAtt = document.getElementById("customAttribute")
+const format = document.getElementById("format")
+const drones = document.getElementById("discoDrones")
 
 // All the stuff that can be changed and need to be kept track of
 let ATTRIBUTES = {
@@ -43,8 +45,9 @@ let CHECKS = {
 	"PSYCHE RAISED": "moraledmg",
 	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
 }
-let KEYWORDS = ["New task:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
+let KEYWORDS = ["New task:", "Secret Task complete:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
 	"BREAKTHROUGH IMMINENT:"]
+let DISCO_DRONES = false
 
 // ugly looking conditional for updating custom stuff based on cached data
 if (localStorage.getItem("ATTRIBUTES")) {
@@ -72,7 +75,7 @@ if (localStorage.getItem("ATTRIBUTECOLORS")) {
 if (localStorage.getItem("checks")) {
 	for (const [name, colors] of Object.entries(JSON.parse(localStorage.getItem("checks")))) {
 		CHECKS[name.toUpperCase().trim()] = name.toLowerCase().trim()
-		formatStylesheet.insertRule(`#workskin .${name.toLowerCase().trim()} {
+		formatStylesheet.insertRule(`#workskin .${name.replace(" ", "").replace(/[^a-zA-Z]/g, '').toLowerCase().trim()} {
 			color: ${colors[0]};
   background-color: ${colors[1]};
   padding: 0.5%;
@@ -101,15 +104,38 @@ const createSkillDialogue = (type, line) => {
 	}
 	if (type === "you") {
 		oldSkill = skill
-		skill = "<p class='you'><span class='neutral'>" + skill + "</span>"
+		if (DISCO_DRONES) {
+			skill = "<p class='you'>" + `${skill}:~$`
+		}
+		else {
+			skill = "<p class='you'><span class='neutral'>" + skill + "</span>"
+		}
 	} else {
 		oldSkill = skill
+		if (DISCO_DRONES) {
+			if (type === "neutral") {
+				skill = `/DESC/${skill}`
+			}
+			else {
+				skill = `/${type.toUpperCase()}/${skill}`
+			}
+		}
 		skill = `<p><span class='${type}'>` + skill + "</span>"
 	}
 	if (check) {
 		check = "<span class='check'>[" + check + "</span>"
+		if (DISCO_DRONES) {
+			check = check.replace("Success", "<span class='greencheck'>Success</span>")
+			check = check.replace("Failure", "<span class='failurecheck'>Failure</span>")
+		}
 	}
-	const newLine = skill + check + " - " + text + "</p>"
+	let newLine = skill + check + " - " + text + "</p>"
+	if (DISCO_DRONES) {
+		newLine = skill + check + " > " + text + "</p>"
+		if (type === "you") {
+			newLine = skill + " " + text + "</p>"
+		}
+	}
 	return [newLine, oldSkill]
 }
 
@@ -194,6 +220,9 @@ const replaceSkillBonuses = (newLine) => {
 							if (word.replace(/[^a-zA-Z ]/g, "").toUpperCase() === att.at(-1) || word.replace(/[^a-zA-Z ]/g, "").toUpperCase() === att.at(-2)) {
 								done = true
 								words[i] = `<span class='${att.at(-1).toLowerCase()}'>${word.replace(/[^a-zA-Z ]/g, "")}</span>${word.replace(/[a-zA-Z ]/g, "")}`
+								if (DISCO_DRONES) {
+									words[i] = `<span class='${att.at(-1).toLowerCase()}'>/${word.replace(/[^a-zA-Z ]/g, "")}</span>${word.replace(/[a-zA-Z ]/g, "")}`
+								}
 							}
 							i++
 						}
@@ -203,6 +232,9 @@ const replaceSkillBonuses = (newLine) => {
 				}
 				done = true
 				newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + `<span class='${att.at(-1).toLowerCase()}'>` + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+				if (DISCO_DRONES) {
+					newLine = newLine.slice(0, newLine.toUpperCase().indexOf(skill)) + `<span class='${att.at(-1).toLowerCase()}'>` + `/${att.at(-1)}/` + newLine.slice(newLine.toUpperCase().indexOf(skill), newLine.toUpperCase().indexOf(skill) + skill.length) + "</span>" + newLine.slice(newLine.toUpperCase().indexOf(skill) + skill.length)
+				}
 			}
 		})
 	}
@@ -222,17 +254,28 @@ formatInput.addEventListener("input", event => {
 	let bonus = false
 	let item = false
 	let feld = false
+	let process = false
 	for (const line of textList) {
 		const tempDiv = document.createElement("div")
 		tempDiv.innerHTML = line
 		const cleanLine = tempDiv.textContent
 		const firstWord = cleanLine.split(" ")[0]
 		if (cleanLine.trim() === "FELD OVERLAY START") {
-			formatOutput.value += "<div class='feld-overlay-start'></div><div class='feld-body'>\n"
+			if (DISCO_DRONES) {
+				formatOutput.value += "<div class='jcjenson-start'><p class='getridofthestupidptag'><img src='https://i.postimg.cc/QdSVssh4/topbar.png' class='topbar'></p></div><div class='terminal'>\n"
+			}
+			else {
+				formatOutput.value += "<div class='feld-overlay-start'></div><div class='feld-body'>\n"
+			}
 			feld = true
 		}
 		else if (cleanLine.trim() === "FELD OVERLAY END") {
-			formatOutput.value += "</div><div class='feld-overlay-end'></div>"
+			if (DISCO_DRONES) {
+				formatOutput.value += "</div><div class='jcjenson-end'><p class='getridofthestupidptag'><img src='https://i.postimg.cc/2ShqtTWR/bottombar.png' border='0' alt='bottombar' class='topbar'></p></div>"
+			}
+			else {
+				formatOutput.value += "</div><div class='feld-overlay-end'></div>"
+			}
 			feld = false
 		}
 		else if (cleanLine.trim() === "OBLIVION START") {
@@ -242,7 +285,7 @@ formatInput.addEventListener("input", event => {
 			else {
 				let lines = formatOutput.value.split("\n")
 				lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 				formatOutput.value = lines.join("\n")
 				formatOutput.value += "<div class='oblivionvar-1'><div class='transition-text'>\n"
 			}
@@ -251,7 +294,7 @@ formatInput.addEventListener("input", event => {
 			if (feld) {
 				let lines = formatOutput.value.split("\n")
 				lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+				lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 				formatOutput.value = lines.join("\n")
 				formatOutput.value += "</div></div>\n"
 			}
@@ -259,100 +302,104 @@ formatInput.addEventListener("input", event => {
 		else if (cleanLine.trim() === "FELD OBLIVION START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='feld-oblivion-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "FELD OBLIVION END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "OBLIVION FELD START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='oblivion-feld-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "OBLIVION FELD END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "BLANK START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='blank'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "BLANK END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "BLANK FELD START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='blank-feld-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "BLANK FELD END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "FELD BLANK START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='feld-blank-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "FELD BLANK END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "BLANK OBLIVION START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='blank-oblivion-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "BLANK OBLIVION END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
 		}
 		else if (cleanLine.trim() === "OBLIVION BLANK START") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "<div class='oblivion-blank-transition'><div class='transition-text'>\n"
 		}
 		else if (cleanLine.trim() === "OBLIVION BLANK END") {
 			let lines = formatOutput.value.split("\n")
 			lines[lines.length - 2] = lines.at(-2).replace("<p>", "<p class='transition-end'>")
-			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='transition-end'>")
+			lines[lines.length - 2] = lines.at(-2).replace("<p class='you'>", "<p class='you transition-end'>")
 			formatOutput.value = lines.join("\n")
 			formatOutput.value += "</div></div>\n"
+		}
+		else if (cleanLine.trim() === "START PROCESS") {
+			process = true
+			formatOutput.value += "<p align='center' class='task'><span class='neutral'>\n"
 		}
 		else if (line.trim() === "<ol>") {
 			dialogueTree = true
@@ -373,6 +420,15 @@ formatInput.addEventListener("input", event => {
 			formatOutput.value += newLine + "\n"
 		}
 		// These next two are ugly as b#lls but I have neither the care nor the motivation to make it better
+		else if (process) {
+			if (cleanLine === "END PROCESS") {
+				process = false
+				formatOutput.value += "</span></p>\n"
+			}
+			else {
+				formatOutput.value += cleanLine + "<br>\n"
+			}
+		}
 		else if (thought) {
 			if (cleanLine === "END THOUGHT") {
 				bonus = false
@@ -445,7 +501,40 @@ formatInput.addEventListener("input", event => {
 			if (checkKeywords(cleanLine).toUpperCase() === "ITEM GAINED:") {
 				item = true
 			}
-			newLine = "<p class='task'>" + cleanLine + "</p>"
+			newLine = cleanLine
+			if (DISCO_DRONES) {
+				if (checkKeywords(cleanLine).toUpperCase() === "NEW TASK:") {
+					newLine = `SYS://addtask --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "TASK UPDATED:") {
+					newLine = `SYS://updtask --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "TASK COMPLETE:") {
+					newLine = `SYS://cmpltask --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "SECRET TASK COMPLETE:") {
+					newLine = `SYS://cmpltask --secret --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "ITEM GAINED:") {
+					newLine = `SYS://assimilate --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "ITEM LOST:") {
+					newLine = `SYS://disassembled --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:") {
+					newLine = `SYS://startdaemon --type="thought" --name="${cleanLine.split(":")[1].trim()}"`
+				}
+				else if (checkKeywords(cleanLine).toUpperCase() === "BREAKTHROUGH IMMINENT:") {
+					process = true
+					thought = true
+					formatOutput.value += "<p align='center' class='task'><span class='neutral'>\n"
+					continue
+				}
+				else if (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10) {
+					newLine = `SYS://addxp --num=${cleanLine.split(" ")[0].slice(1)}`
+				}
+			}
+			newLine = "<p class='task'>" + newLine + "</p>"
 			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.replace(/[^a-zA-Z]/g, '').length > 1) {
@@ -462,11 +551,26 @@ formatInput.addEventListener("input", event => {
 					if (word.split("[").length !== 1) {
 						check = word.split("[")[1].split("]")[0]
 						check = `<span class='check'>[${check}]</span>`
+						if (DISCO_DRONES) {
+							check = check.replace("Success", "<span class='greencheck'>Success</span>")
+							check = check.replace("Failure", "<span class='failurecheck'>Failure</span>")
+						}
 					}
-					skill += `<span class='${checkSkillNames(word)[0]}'>` + word.split("[")[0] + "</span>" + check + "<span class='neutral'> AND </span>"
+					if (DISCO_DRONES) {
+						skill += `<span class='${checkSkillNames(word)[0]}'>` + `/${checkSkillNames(word)[0].toUpperCase()}/` + word.split("[")[0] + "</span>" + check + "<span class='neutral'> AND </span>"
+					}
+					else {
+						skill += `<span class='${checkSkillNames(word)[0]}'>` + word.split("[")[0] + "</span>" + check + "<span class='neutral'> AND </span>"
+					}
 				}
-				newLine = newLine.split(" - ").slice(1).join(" - ")
-				formatOutput.value += skill.slice(0, -34) + " - " + newLine + "\n"
+				if (DISCO_DRONES) {
+					newLine = newLine.split(" > ").slice(1).join(" > ")
+					formatOutput.value += skill.slice(0, -34) + " > " + newLine + "\n"
+				}
+				else {
+					newLine = newLine.split(" - ").slice(1).join(" - ")
+					formatOutput.value += skill.slice(0, -34) + " - " + newLine + "\n"
+				}
 			}
 		}
 		else if (firstWord.length >= 1) {
@@ -482,11 +586,12 @@ copyButton.addEventListener("click", async () => {
 })
 
 previewButton.addEventListener("click", () => {
-	if (formatOutput.value.includes("'feld-overlay-end'")) {
+	if (formatOutput.value.includes("'feld-overlay-end'") || formatOutput.value.includes("'jcjenson-end'")) {
 		preview.innerHTML = formatOutput.value
 	}
 	else {
 		formatOutput.value = formatOutput.value.replace("feld-body", "feld-body-var2")
+		formatOutput.value = formatOutput.value.replace("terminal", "terminal-var1")
 		preview.innerHTML = formatOutput.value + "</div>"
 	}
 })
@@ -596,14 +701,14 @@ customSkills.addEventListener("submit", (event) => {
 			else if (attribute[0] === name + "color") {
 				ATTRIBUTECOLORS[att.at(-1).toLowerCase()] = attribute[1]
 				formatStylesheet.insertRule(`#workskin .${att.at(-1).toLowerCase()} {
-					color: ${attribute[1]};
+					color: ${attribute[1]} !important;
 					font-weight: bold
 				}`, formatStylesheet.cssRules.length)
 			}
 			else if (attribute[0] === "YOUcolor") {
 				ATTRIBUTECOLORS["you"] = attribute[1]
 				formatStylesheet.insertRule(`#workskin .you {
-					color: ${attribute[1]};
+					color: ${attribute[1]} !important;
 				}`, formatStylesheet.cssRules.length)
 			}
 		}
@@ -654,7 +759,7 @@ resetSkillsButton.addEventListener("click", () => {
 	customButton.dispatchEvent(new Event("click", { bubbles: true }))
 	for (const [att, color] of Object.entries(ATTRIBUTECOLORS)) {
 		formatStylesheet.insertRule(`#workskin .${att} {
-			color: ${color};
+			color: ${color} !important;
 			font-weight: bold
 			}`, formatStylesheet.cssRules.length)
 	}
@@ -734,4 +839,17 @@ customAtt.addEventListener("submit", (event) => {
 	setTimeout(function () {
 		alertPlaceholder.classList.add('show');
 	}, 100);
+})
+
+drones.addEventListener("change", (event) => {
+	if (event.target.checked) {
+		format.setAttribute("href", "drones.css")
+		DISCO_DRONES = true
+	}
+	else {
+		format.setAttribute("href", "format.css?version=1")
+		DISCO_DRONES = false
+	}
+	formatStylesheet = document.styleSheets[2]
+	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })

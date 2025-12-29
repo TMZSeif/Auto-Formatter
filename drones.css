@@ -1,0 +1,600 @@
+#workskin {
+  padding: 0;
+  overflow: hidden;
+  max-width: 68em !important;
+  min-width: 49em !important;
+}
+
+#workskin div.userstuff p:first-child,
+#workskin div.userstuff p:first-of-type {
+  margin: 0;
+}
+
+#workskin div.userstuff {
+  color: #cfd5bf;
+  overflow: hidden;
+}
+
+#workskin #chapters div.userstuff a,
+#workskin .userstuff.module a {
+  color: #cfd5bf;
+}
+
+#workskin .jcjenson-start {
+  background-position: 65% 0, 0 100%;
+  background-repeat: no-repeat;
+  z-index: 20;
+  margin-bottom: 2em;
+  margin-left: -2%;
+  border: 10px;
+  box-sizing: border-box;
+  transform-origin: top right;
+  display: block;
+}
+
+#workskin .getridofthestupidptag {
+  display: inline;
+}
+
+#workskin .topbar {
+  width: 100%;
+}
+
+#workskin .terminal {
+  background-color: #160b26;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  margin-bottom: -6em;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 0;
+}
+
+#workskin .terminal-var1 {
+  background-color: #160b26;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+  background-size: .4em 7.5em, .4em 7.5em, .4em 7.5em, 3.725em 15%, 100% 97%, 3.725em 97%, 3.725em 3%, 3.725em 3%, 3.725em 3%, 3.725em 3%, .3em 100%, .3em 100%, 100% 100%, 100% 100%, 2.2em 100%, 1.2em 100%, 100% 100%, 100% 100%, 2.25em 100%, 1.25em 100%;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: -4em;
+  margin-bottom: -6em;
+  padding: 3em 2.6em 6em 2.6em;
+  z-index: 0;
+}
+
+#workskin .jcjenson-end {
+  background-size: 3.25em 100%, 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 20;
+  margin-top: 1em;
+  margin-left: -2%;
+  border: 10px;
+  box-sizing: border-box;
+  transform-origin: bottom left;
+  display: block;
+  overflow: hidden;
+}
+
+#workskin .broken-transition {
+  background: linear-gradient(180deg, #160b26 0%, rgba(0, 0, 0, 1) 100%);
+  color: #cfd5bf;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 5;
+  height: 50em;
+  position: relative;
+  top: -0.5em;
+}
+
+#workskin .oblivionfadein {
+  margin: 0em -2.6em 0em -2.6em;
+  width: auto;
+  height: 30em;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+#workskin .oblivionfadeout {
+  margin: 0em -2.6em 0em -2.6em;
+  width: auto;
+  height: 30em;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+#workskin .oblivion {
+  background-color: #000000;
+  color: #ffffff;
+  background-repeat: no-repeat;
+  width: 99%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3em 2.6em 4em 2.6em;
+  z-index: 5;
+  position: relative;
+  top: -0.6em;
+}
+
+#workskin div.preface {
+  margin-bottom: 0;
+}
+
+#workskin div.afterword {
+  margin-top: 0;
+}
+
+#workskin .hide {
+  display: none;
+}
+
+#workskin .myDIV:hover+.hide {
+  display: block;
+  color: green;
+}
+
+#workskin #chapters div.userstuff p,
+#workskin .userstuff.module p {
+  text-indent: -1em;
+  margin-left: 1em;
+}
+
+#workskin #chapters div.userstuff .indent,
+#workskin .userstuff.module .indent {
+  text-indent: 0em;
+  margin-left: 1em;
+}
+
+#workskin .check {
+  position: relative;
+  color: #9c9686;
+}
+
+#workskin .check:hover>.checkinfo {
+  display: block;
+  opacity: 1;
+}
+
+#workskin .feld-body p:first-of-type .checkinfo,
+#workskin .feld-body p:nth-of-type(2) .checkinfo,
+#workskin .feld-body p:nth-of-type(3) .checkinfo {
+  top: 100%;
+}
+
+#workskin .checkinfo {
+  color: #cfd5bf;
+  top: -700%;
+  left: 0;
+  display: none;
+  height: 125px;
+  width: 200px;
+  text-align: center;
+  background-color: #000;
+  position: absolute;
+}
+
+#workskin .checkinfo .checktext {
+  display: block;
+  margin: 5px 16px !important;
+  padding-left: 16px;
+}
+
+#workskin .checkline {
+  display: block;
+  border: 1.5px solid #9c9686;
+  content: none;
+  margin: 4px 0;
+}
+
+#workskin .neutral,
+#workskin .int,
+#workskin .psy,
+#workskin .fys,
+#workskin .mot {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#workskin .you {
+  color: #c3d2db;
+}
+
+#workskin .slate {
+  color: #ffbe00;
+}
+
+#workskin .slateskill {
+  color: #ffbe00;
+}
+
+#workskin .int,
+#workskin .intellect {
+  color: #5cc1d7;
+}
+
+#workskin .psy,
+#workskin .psyche {
+  color: #7556cf;
+}
+
+#workskin .fys,
+#workskin .physique {
+  color: #cb476a;
+}
+
+#workskin .mot,
+#workskin .motorics {
+  color: #e3b734;
+}
+
+#workskin .greencheck {
+  color: #99ba88;
+}
+
+#workskin .failurecheck {
+  color: #c23e19;
+}
+
+#workskin .pinkcheck {
+  color: #bd669f;
+}
+
+#workskin .task {
+  color: #6490ff;
+}
+
+#workskin hr {
+  border: none;
+  margin: 2.625em auto 3.0025em auto;
+}
+
+#workskin hr:before {
+  content: "⎯⎯⎯ ◵ ⎯⎯⎯";
+  display: block;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+#workskin li {
+  color: #222222;
+}
+
+#workskin li.dialogue::marker,
+#workskin li.dialogue-fin::marker {
+  color: #cfd5bf;
+  content: "- ";
+}
+
+#workskin li.dialogue-check::marker {
+  color: #222222;
+  content: "- ";
+}
+
+#workskin li,
+#workskin .dialogue,
+#workskin li.dialogue,
+#workskin .dialogue-fin,
+#workskin li.dialogue-fin,
+#workskin .dialogue-check,
+#workskin li.dialogue-check {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#workskin .dialogue,
+#workskin li.dialogue {
+  color: #39e61b;
+  padding: 0.4em 0.4em 0.4em 0;
+}
+
+#workskin .dialogue-fin,
+#workskin li.dialogue-fin {
+  color: #228011;
+  padding: 0.4em 0.4em 0.4em 0;
+}
+
+#workskin .dialogue-check,
+#workskin li.dialogue-check {
+  padding: 0.4em 0.4em 0.4em 0;
+  position: relative;
+  z-index: 0;
+}
+
+#workskin .whitecheck,
+#workskin .whitecheck-locked,
+#workskin .redcheck {
+  color: #222222;
+  margin-left: -1.75em;
+  padding: 0.3em 0.3em 0.3em 1.75em;
+  line-height: 1.5em;
+  width: 90%;
+  position: relative;
+  z-index: -9;
+}
+
+#workskin .whitecheck {
+  background-color: #ffffff;
+}
+
+#workskin .whitecheck-locked {
+  background-color: #616060;
+  color: #211e1e;
+}
+
+#workskin .redcheck {
+  background-color: #ff2f00;
+}
+
+#workskin .whitecheck:hover,
+#workskin li.dialogue-check:hover>.whitecheck {
+  background-color: #868070;
+  color: #fefbf4;
+}
+
+#workskin .redcheck:hover,
+#workskin li.dialogue:hover,
+#workskin li.dialogue-fin:hover,
+#workskin li.dialogue-check:hover,
+#workskin li.dialogue-check:hover>.redcheck {
+  color: #fefbf4;
+}
+
+#workskin .success {
+  color: #e2e2e2;
+  background-color: #16de3e;
+  padding: 0.5%;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .fail {
+  color: #e2e2e2;
+  background-color: #ff1e1e;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .quiet {
+  color: #e2e2e2;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'GNU Unifont', Verdana, Helvetica, sans-serif;
+  line-height: normal;
+  font-size: 120%;
+  background-color: #473d33;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .prifused {
+  color: #fadbe4;
+  text-shadow: 2px 2px 2px #e44646, 2px 2px 2px #e44646;
+}
+
+#workskin .priafused {
+  color: #e44646;
+  text-shadow: 2px 2px 2px #a83434, 2px 2px 2px #a83434;
+}
+
+#workskin .prifused2 {
+  color: #fadbe4;
+  text-shadow: 2px 2px 2px #f9a9c4, 2px 2px 2px #f9a9c4;
+}
+
+#workskin .moraledmg {
+  color: #e2e2e2;
+  background-color: #d22fff;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .moraleheal {
+  color: #e2e2e2;
+  background-color: #29c2f5;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .healthdmg {
+  color: #e2e2e2;
+  background-color: #dc0b00;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .healthheal {
+  color: #e2e2e2;
+  background-color: #ff561e;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .reddrug {
+  color: #e2e2e2;
+  background-color: #cb476a;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .moneygained {
+  color: #e2e2e2;
+  background-color: #fff714;
+  margin-left: 0px;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  text-indent: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#workskin .bigicon {
+  color: #e2e2e2;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3em;
+}
+
+#workskin .feldsnippet {
+  background-color: #222222;
+  color: #cfd5bf;
+  padding: 0.5%;
+  padding-left: 54px;
+  padding-right: 54px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  text-indent: 0em;
+}
+
+#workskin .red {
+  color: #ff0000;
+}
+
+#workskin .green {
+  color: #00ff00;
+}
+
+#workskin .gold {
+  color: #ffff16;
+}
+
+#workskin .cursor {
+  width: 10px;
+  height: 20px;
+  position: relative;
+  top: 3px;
+}
+
+#workskin .transition-text {
+  width: 94%;
+}
+
+#workskin .transition-end {
+  margin-bottom: 0;
+}
+
+#workskin .blank {
+  background-color: #FFF;
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .feld-oblivion-transition {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0) 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .feld-blank-transition {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255) 70%);
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+
+#workskin .blank-oblivion-transition {
+  background: linear-gradient(#fff, #000 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .blank-feld-transition {
+  background: linear-gradient(rgba(255, 255, 255), rgba(0, 0, 0, 0) 70%);
+  color: #000;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivion-feld-transition {
+  background: linear-gradient(rgba(0, 0, 0), rgba(0, 0, 0, 0) 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivion-blank-transition {
+  background: linear-gradient(#000, #fff 70%);
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+}
+
+#workskin .oblivionvar-1 {
+  background-color: #000000;
+  color: #ffffff;
+  background-repeat: no-repeat;
+  position: relative;
+  right: 2.6em;
+  width: 107%;
+  padding-left: 2.6em;
+  padding-top: 1em;
+  z-index: 5;
+}
