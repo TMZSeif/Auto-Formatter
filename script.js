@@ -851,6 +851,9 @@ drones.addEventListener("change", (event) => {
 		format.setAttribute("href", "format.css?version=2")
 		DISCO_DRONES = false
 	}
+	for (const style of document.styleSheets) {
+		console.log(style.href)
+	}
 	formatStylesheet = document.styleSheets[3]
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
 })
@@ -860,5 +863,6 @@ cssCopy.addEventListener("click", async () => {
 	for (const rule of formatStylesheet.cssRules)  {
 		css += rule.cssText + "\n"
 	}
+	console.log(formatStylesheet.href)
 	await navigator.clipboard.writeText(css)
 })
