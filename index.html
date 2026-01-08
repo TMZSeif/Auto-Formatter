@@ -64,10 +64,16 @@
 								placeholder="Formatted text will be here..." id="formatOutput"></textarea>
 						</div>
 					</div>
-					<a tabindex="0" type="button" id="copyBtn" class="btn mb-2 align-self-center btn-warning"
-						data-bs-trigger="focus" data-bs-toggle="popover"
-						data-bs-content="Formatted text has been copied." data-bs-placement="top">Copy Formatted
-						Text</a>
+					<div>
+						<a tabindex="0" type="button" id="copyBtn" class="btn mb-2 align-self-center btn-warning"
+							data-bs-trigger="focus" data-bs-toggle="popover"
+							data-bs-content="Formatted text has been copied." data-bs-placement="top">Copy Formatted
+							Text</a>
+						<a tabindex="0" type="button" id="copyCSSBtn" class="btn mb-2 align-self-center btn-warning"
+							data-bs-trigger="focus" data-bs-toggle="popover" data-bs-content="CSS has been copied."
+							data-bs-placement="top">Copy CSS Formatting</a>
+					</div>
+
 				</div>
 			</div>
 			<div class="tab-pane fade flex-grow-1 w-100" id="preview-tab-pane" role="tabpanel"
@@ -172,8 +178,11 @@
 						OVERLAY START and FELD OVERLAY END as well as all the other keywords used for backgrounds will
 						remain the same. This is intended for ease of use between switching from one format to the
 						other.</p>
-					<p class="text text-light text-center">Likewise, every other aspect of writing that is used for normal DE formatting will remain the exact same for Disco Drone formatting. You'll need to change nothing.</p>
-					<p class="text text-light text-center">A new feature that comes exclusively with Disco Drone is PROCESSES. To initiate a PROCESS simply wrap text in START PROCESS and END PROCESS like so</p>
+					<p class="text text-light text-center">Likewise, every other aspect of writing that is used for
+						normal DE formatting will remain the exact same for Disco Drone formatting. You'll need to
+						change nothing.</p>
+					<p class="text text-light text-center">A new feature that comes exclusively with Disco Drone is
+						PROCESSES. To initiate a PROCESS simply wrap text in START PROCESS and END PROCESS like so</p>
 					<pre><code style="color: #e685b5;">
 						START PROCESS
 						SOFTWARE INTERRUPT DETECTED
@@ -181,7 +190,8 @@
 						NAME: "Name"
 						END PROCESS
 					</code></pre>
-					<p class="text text-light text-center">Note: Breakthrough Imminent will automatically start a PROCESS which you will then need to end. For example</p>
+					<p class="text text-light text-center">Note: Breakthrough Imminent will automatically start a
+						PROCESS which you will then need to end. For example</p>
 					<pre><code style="color: #e685b5;">
 						Breakthrough Imminent: Thought
 						SOFTWARE INTERRUPT DETECTED
@@ -191,7 +201,8 @@
 						Insert your Thought description here
 						END THOUGHT
 					</code></pre>
-					<p class="text text-light text-center">Warning: You may need to resave formatting changes in Custom Formatting if you switch to Disco Drone mode or vice versa.</p>
+					<p class="text text-light text-center">Warning: You may need to resave formatting changes in Custom
+						Formatting if you switch to Disco Drone mode or vice versa.</p>
 					<h1 class="text text-light text-center">Skill Dialogue</h1>
 					<p class="text text-light text-center">When creating Skill dialogue, all Skill names must be fully
 						capitalized.</p>

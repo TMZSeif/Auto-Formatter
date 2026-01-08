@@ -19,6 +19,7 @@ const resetChecks = document.getElementById("resetChecks")
 const customAtt = document.getElementById("customAttribute")
 const format = document.getElementById("format")
 const drones = document.getElementById("discoDrones")
+const cssCopy = document.getElementById("copyCSSBtn")
 
 // All the stuff that can be changed and need to be kept track of
 let ATTRIBUTES = {
@@ -847,9 +848,17 @@ drones.addEventListener("change", (event) => {
 		DISCO_DRONES = true
 	}
 	else {
-		format.setAttribute("href", "format.css?version=1")
+		format.setAttribute("href", "format.css?version=2")
 		DISCO_DRONES = false
 	}
-	formatStylesheet = document.styleSheets[2]
+	formatStylesheet = document.styleSheets[3]
 	formatInput.dispatchEvent(new Event("input", { bubbles: true }))
+})
+
+cssCopy.addEventListener("click", async () => {
+	let css = ""
+	for (const rule of formatStylesheet.cssRules)  {
+		css += rule.cssText + "\n"
+	}
+	await navigator.clipboard.writeText(css)
 })
