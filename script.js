@@ -243,8 +243,17 @@ const replaceSkillBonuses = (newLine) => {
 	return newLine
 }
 
+// Debounce function to start main format loop only after user has stopped typing
+const debounce = (func, delay) => {
+	let timeoutId;
+	return function (...args) {
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => func.apply(this, args), delay)
+	}
+}
+
 // Main formatting event loop
-formatInput.addEventListener("input", event => {
+const formatLoop = debounce(event => {
 	const unformattedText = event.target.value
 	formatOutput.value = ""
 	const textList = marked.parse(unformattedText).split("\n")
@@ -579,6 +588,11 @@ formatInput.addEventListener("input", event => {
 			formatOutput.value += newLine + "\n"
 		}
 	}
+}, 500)
+
+
+formatInput.addEventListener("input", event => {
+	formatLoop(event)
 })
 
 // Button events
