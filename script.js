@@ -47,7 +47,7 @@ let CHECKS = {
 	"MOTORICS RAISED": "moneygained", "MONEY GAINED": "moneygained", "MONEY SPENT": "moneygained"
 }
 let KEYWORDS = ["New task:", "Secret Task complete:", "Task complete:", "Task updated:", "Item gained:", "Item lost:", "Thought gained:",
-	"BREAKTHROUGH IMMINENT:"]
+	"Breakthrough Imminent:"]
 let DISCO_DRONES = false
 
 // ugly looking conditional for updating custom stuff based on cached data
@@ -505,6 +505,11 @@ const formatLoop = debounce(event => {
 		}
 		else if (checkKeywords(cleanLine) || (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10)) {
 			lastestSkill = ""
+			if (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10) {
+				newLine = DISCO_DRONES ? "<p class='task'>" + `SYS://addxp --num=${cleanLine.match(/\d+/).join("")}` + "</p>" : "<p class='task'>" + cleanLine + "</p>"
+				formatOutput.value += newLine + "\n"
+				continue
+			}
 			if (checkKeywords(cleanLine).toUpperCase() === "THOUGHT GAINED:" || checkKeywords(cleanLine) === "BREAKTHROUGH IMMINENT:") {
 				thought = true
 			}
@@ -540,11 +545,8 @@ const formatLoop = debounce(event => {
 					formatOutput.value += "<p align='center' class='task'><span class='neutral'>\n"
 					continue
 				}
-				else if (cleanLine.toLowerCase().includes("xp") && cleanLine.length < 10) {
-					newLine = `SYS://addxp --num=${cleanLine.split(" ")[0].slice(1)}`
-				}
 			}
-			newLine = "<p class='task'>" + newLine + "</p>"
+			newLine = "<p class='task'>" + cleanLine + "</p>"
 			formatOutput.value += newLine + "\n"
 		}
 		else if (firstWord === firstWord.toUpperCase() && firstWord.replace(/[^a-zA-Z]/g, '').length > 1) {
