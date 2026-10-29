@@ -677,6 +677,7 @@ customButton.addEventListener("click", () => {
 	const divInput = document.createElement("div")
 	const colorPicker = document.createElement("input")
 	const skill = document.createElement("input")
+	const helpText = document.createElement("div")
 	div.className = "mb-3 d-flex flex-column"
 	label.setAttribute("for", "YOU")
 	label.className = "form-label text-light"
@@ -698,6 +699,10 @@ customButton.addEventListener("click", () => {
 	skill.value = YOU
 	divInput.appendChild(skill)
 	div.appendChild(divInput)
+	helpText.id = "YOU" + "help"
+	helpText.className = "form-text"
+	helpText.innerText = 'Only one value may be entered into here. Comma separated values will not work.'
+	div.appendChild(helpText)
 	Skills.appendChild(div)
 })
 
